@@ -1,53 +1,68 @@
 "use client"
 
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { ThemeToggle } from "./theme-toogle"
 
 export function Navbar() {
+  const pathname = usePathname()
+
+  const links = [
+    { href: "/", label: "_hello" },
+    { href: "/docs", label: "docs" },
+    { href: "/changelog", label: "changelogs" },
+    { href: "/blogs", label: "blogs" },
+    { href: "/community", label: "community" },
+    { href: "/enterprise", label: "enterprise" },
+  ]
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#09090b]">
-      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
-        
-        {/* Left */}
+    <header className="sticky top-0 z-50 w-full bg-white dark:bg-black text-black dark:text-white border-b border-zinc-200 dark:border-zinc-800">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
+
+        {/* Left — Logo */}
         <div className="flex items-center gap-6">
           <Link
             href="/"
-            className="text-sm font-semibold tracking-tight hover:opacity-70 transition-opacity"
+            className="font-bold text-lg tracking-tight hover:opacity-80 transition-opacity"
           >
-            Prizmux
+            PRIZMUX
           </Link>
-
-          <nav className="hidden md:flex items-center gap-5 text-sm text-zinc-600 dark:text-zinc-400">
-            <Link
-              href="/docs"
-              className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
-            >
-              Docs
-            </Link>
-          </nav>
         </div>
 
-        {/* Right */}
-        <div className="flex items-center gap-4 text-sm">
+        {/* Center / Right — Links */}
+        <div className="flex items-center gap-4">
+          {links.map((link) => {
+            const isActive = pathname === link.href
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`px-2 py-1 text-sm font-medium hover:opacity-80 transition-opacity ${
+                  isActive ? "border-b-2 border-black dark:border-white" : ""
+                }`}
+              >
+                {link.label}
+              </Link>
+            )
+          })}
+        </div>
+
+        {/* Far Right — Icons */}
+        <div className="flex items-center gap-4">
           <a
             href="https://github.com/your-username/prizmux"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+            className="hover:opacity-80 transition-opacity"
           >
-            GitHub
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              {/* GitHub icon path */}
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.207 11.387.6.113.793-.263.793-.583v-2.234c-3.338.724-4.033-1.613-4.033-1.613-.546-1.387-1.333-1.756-1.333-1.756-1.09-.746.083-.73.083-.73 1.205.085 1.84 1.238 1.84 1.238 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.605-2.665-.303-5.467-1.332-5.467-5.93 0-1.31.47-2.38 1.235-3.22-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.3 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.288-1.552 3.295-1.23 3.295-1.23.654 1.653.243 2.873.12 3.176.77.84 1.233 1.91 1.233 3.22 0 4.61-2.807 5.625-5.48 5.921.43.37.823 1.096.823 2.21v3.293c0 .323.192.699.8.58C20.565 21.795 24 17.297 24 12c0-6.63-5.37-12-12-12z" />
+            </svg>
           </a>
 
-          <a
-            href="https://npmjs.com/package/prizmux"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
-          >
-            npm
-          </a>
-
-          <ThemeToggle/>
+          <ThemeToggle />
         </div>
       </div>
     </header>

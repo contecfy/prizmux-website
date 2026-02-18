@@ -1,6 +1,6 @@
 import { codeToHtml } from "shiki"
-
 import React from "react"
+import { CodeBlockClient } from "./code-block-client"
 
 type CodeBlockProps = {
   // MDX passes content as `children` and language in `className` (e.g. "language-tsx").
@@ -19,18 +19,18 @@ export async function CodeBlock({ children, className }: CodeBlockProps) {
     return <code>{children}</code>
   }
 
-  const html = await codeToHtml(code, {
+  // Generate separate HTML for light and dark themes
+  const lightHtml = await codeToHtml(code, {
     lang,
-    themes: {
-      light: "github-light",
-      dark: "github-dark",
-    },
+    theme: "github-light",
+  })
+
+  const darkHtml = await codeToHtml(code, {
+    lang,
+    theme: "github-dark",
   })
 
   return (
-    <div
-      className="rounded-md border border-zinc-200 dark:border-zinc-800 overflow-hidden text-sm"
-      dangerouslySetInnerHTML={{ __html: html }}
-    />
+    <CodeBlockClient lightHtml={lightHtml} darkHtml={darkHtml} code={code} />
   )
 }

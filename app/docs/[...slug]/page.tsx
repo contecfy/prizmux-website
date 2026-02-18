@@ -1,25 +1,19 @@
-import { allDocs } from "@/.contentlayer/generated"
 import { notFound } from "next/navigation"
-import { MDXComponents } from "mdx/types"
-import { getMDXComponent } from "next-contentlayer/hooks"
+import { MDXRemote } from "next-mdx-remote/rsc"
 import { CodeBlock } from "@/components/code-block"
+import { getDocBySlug } from "@/lib/mdx"
 
 interface PageProps {
   params: Promise<{ slug: string[] }>
 }
 
-const mdxComponents: MDXComponents = {
-  // keep inline code as a regular <code> element
-  code: (props) => <code {...props} />,
-  // MDX wraps fenced code blocks as <pre><code className="language-...">..</code></pre>
-  // Map `pre` to a component that extracts the inner <code> and forwards it
-  // to our `CodeBlock` component so it renders a block-level element.
-  pre: (props) => {
+const mdxComponents = {
+  code: (props: any) => <code {...props} />,
+  pre: (props: any) => {
     const child = props.children as any
-    if (child?.props && child.props.mdxType === 'code') {
+    if (child?.props && child.props.className?.startsWith('language-')) {
       return <CodeBlock {...child.props} />
     }
-    // fallback to default pre
     return <pre {...props} />
   },
 }
@@ -27,19 +21,18 @@ const mdxComponents: MDXComponents = {
 export default async function DocPage({ params }: PageProps) {
   const { slug } = await params
   const slugPath = slug.join('/')
-  const doc = allDocs.find((d: any) => d.slug === slugPath)
+  const doc = getDocBySlug(slugPath)
 
   if (!doc) notFound()
 
-  const { title, description, body } = doc
-  const MDXContent = getMDXComponent(body.code)
+  const { title, description, content } = doc
 
   return (
     <article className="prose dark:prose-invert max-w-3xl mx-auto px-6 py-10">
       <h1>{title}</h1>
       {description && <p className="text-zinc-600 dark:text-zinc-400">{description}</p>}
       <div>
-        <MDXContent components={mdxComponents} />
+        <MDXRemote source={content} components={mdxComponents} />
       </div>
     </article>
   )
