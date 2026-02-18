@@ -1,5 +1,7 @@
 "use client"
 
+import { Box, Code, Image, ArrowLeft, ImageOff, Phone } from "lucide-react"
+
 interface Feature {
   id: string
   label: string
@@ -48,47 +50,20 @@ const features: Feature[] = [
 ]
 
 function Icon({ id }: { id: string }) {
+  const commonProps = { className: "w-5 h-5" }
   switch (id) {
-    case "frameworks":
-      return (
-        <svg className="w-6 h-6 text-zinc-700 dark:text-zinc-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" d="M12 2v20M3 7h18M3 17h18" />
-        </svg>
-      )
-    case "authentication":
-      return (
-        <svg className="w-6 h-6 text-zinc-700 dark:text-zinc-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" d="M12 11c1.657 0 3-1.343 3-3S13.657 5 12 5s-3 1.343-3 3 1.343 3 3 3z" />
-          <path strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" d="M4 21v-2a6 6 0 0112 0v2" />
-        </svg>
-      )
-    case "oauth":
-      return (
-        <svg className="w-6 h-6 text-zinc-700 dark:text-zinc-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <circle cx="12" cy="12" r="3" strokeWidth="1.5" />
-          <path strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" d="M19 12a7 7 0 00-14 0" />
-        </svg>
-      )
-    case "mfa":
-      return (
-        <svg className="w-6 h-6 text-zinc-700 dark:text-zinc-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <rect x="3" y="7" width="18" height="13" rx="2" strokeWidth="1.5" />
-          <path strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" d="M7 7V5a5 5 0 0110 0v2" />
-        </svg>
-      )
-    case "multi-tenant":
-      return (
-        <svg className="w-6 h-6 text-zinc-700 dark:text-zinc-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" d="M16 11c1.657 0 3-1.343 3-3S17.657 5 16 5s-3 1.343-3 3 1.343 3 3 3zM8 11c1.657 0 3-1.343 3-3S9.657 5 8 5 5 6.343 5 8s1.343 3 3 3z" />
-          <path strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" d="M2 21v-2a4 4 0 014-4h12a4 4 0 014 4v2" />
-        </svg>
-      )
-    case "plugins":
-      return (
-        <svg className="w-6 h-6 text-zinc-700 dark:text-zinc-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" d="M20 8v6a2 2 0 01-2 2h-3l-4 4v-4H6a2 2 0 01-2-2V8a2 2 0 012-2h12a2 2 0 012 2z" />
-        </svg>
-      )
+    case "zero-deps":
+      return <Box {...commonProps} />
+    case "fully-typed":
+      return <Code {...commonProps} />
+    case "bring-your-own":
+      return <Image {...commonProps} />
+    case "no-navigation":
+      return <ArrowLeft {...commonProps} />
+    case "no-image-lib":
+      return <ImageOff {...commonProps} />
+    case "phoneinput":
+      return <Phone {...commonProps} />
     default:
       return null
   }
