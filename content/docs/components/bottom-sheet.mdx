@@ -1,0 +1,181 @@
+---
+title: Bottom Sheet
+description: A smooth modal that slides up from the bottom
+---
+
+# Bottom Sheet
+
+BottomSheet is a modal component that slides up from the bottom of the screen. Perfect for menus, filters, and secondary actions.
+
+## Overview
+
+BottomSheet provides a smooth animation and handles touch gestures automatically. It's perfect for displaying additional options without taking up the full screen.
+
+**Use it for:**
+- Action menus
+- Filters and sorting
+- Additional options
+- Secondary forms
+- Share sheets
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `isVisible` | `boolean` | `false` | Control visibility |
+| `onClose` | `() => void` | - | Called when sheet is dismissed |
+| `snapPoints` | `number[]` | - | Heights where sheet snaps |
+| `children` | `React.ReactNode` | - | Sheet content |
+| `animationType` | `'slide' \| 'fade'` | `'slide'` | Animation style |
+| `handleIndicator` | `boolean` | `true` | Show drag handle |
+
+## Usage
+
+### Basic Bottom Sheet
+
+```tsx
+import { BottomSheet, Button, Text } from 'prizmux'
+import { useState } from 'react'
+
+export default function App() {
+  const [visible, setVisible] = useState(false)
+
+  return (
+    <>
+      <Button 
+        title="Open Sheet" 
+        onPress={() => setVisible(true)}
+      />
+      
+      <BottomSheet
+        isVisible={visible}
+        onClose={() => setVisible(false)}
+        snapPoints={[200]}
+      >
+        <Text>Sheet content</Text>
+      </BottomSheet>
+    </>
+  )
+}
+```
+
+### With Multiple Snap Points
+
+```tsx
+<BottomSheet
+  isVisible={visible}
+  onClose={() => setVisible(false)}
+  snapPoints={[100, 300, 600]}
+>
+  <Text>Drag to snap to different positions</Text>
+</BottomSheet>
+```
+
+### Action Menu
+
+```tsx
+import { BottomSheet, Button, Text } from 'prizmux'
+import { View } from 'react-native'
+
+function ActionMenu() {
+  const [visible, setVisible] = useState(false)
+
+  const actions = [
+    { label: 'Edit', onPress: handleEdit },
+    { label: 'Share', onPress: handleShare },
+    { label: 'Delete', onPress: handleDelete },
+  ]
+
+  return (
+    <>
+      <Button 
+        title="Options" 
+        onPress={() => setVisible(true)}
+      />
+      
+      <BottomSheet
+        isVisible={visible}
+        onClose={() => setVisible(false)}
+        snapPoints={[250]}
+      >
+        <View style={{ paddingHorizontal: 16, gap: 12 }}>
+          {actions.map((action) => (
+            <Button
+              key={action.label}
+              title={action.label}
+              variant="outline"
+              onPress={() => {
+                action.onPress()
+                setVisible(false)
+              }}
+            />
+          ))}
+        </View>
+      </BottomSheet>
+    </>
+  )
+}
+```
+
+### Filter Sheet
+
+```tsx
+import { BottomSheet, Button, Text, Checkbox } from 'prizmux'
+import { View } from 'react-native'
+
+function FilterSheet() {
+  const [visible, setVisible] = useState(false)
+  const [filters, setFilters] = useState({
+    inStock: true,
+    onSale: false,
+  })
+
+  return (
+    <>
+      <Button 
+        title="Filter" 
+        onPress={() => setVisible(true)}
+      />
+      
+      <BottomSheet
+        isVisible={visible}
+        onClose={() => setVisible(false)}
+        snapPoints={[300]}
+      >
+        <View style={{ padding: 16, gap: 16 }}>
+          <Text variant="title">Filters</Text>
+          
+          <Checkbox
+            label="In Stock"
+            value={filters.inStock}
+            onChange={(inStock) => 
+              setFilters({ ...filters, inStock })
+            }
+          />
+          
+          <Checkbox
+            label="On Sale"
+            value={filters.onSale}
+            onChange={(onSale) => 
+              setFilters({ ...filters, onSale })
+            }
+          />
+          
+          <Button 
+            title="Apply Filters"
+            onPress={() => setVisible(false)}
+          />
+        </View>
+      </BottomSheet>
+    </>
+  )
+}
+```
+
+## Notes
+
+- BottomSheet automatically handles backdrop dismiss
+- Supports gestures for dismissing and resizing
+- Content is automatically scrollable if it exceeds snap points
+- Handle indicator helps users understand they can drag
+- Works seamlessly with keyboard

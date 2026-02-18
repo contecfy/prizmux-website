@@ -1,0 +1,194 @@
+---
+title: Image Preview
+description: A gallery component with zoom and swipe gestures
+---
+
+# Image Preview
+
+ImagePreview is a gallery component that displays images with pinch-to-zoom, swipe-to-navigate, and smooth animations.
+
+## Overview
+
+ImagePreview provides a full-featured image viewing experience with gesture support. Perfect for displaying photos, product images, and media galleries.
+
+**Use it for:**
+- Photo galleries
+- Product image viewers
+- Media albums
+- Document previews
+- Portfolio displays
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `images` | `ImageSource[]` | - | Array of images to display |
+| `initialIndex` | `number` | `0` | Starting image index |
+| `onIndexChange` | `(index: number) => void` | - | Called when swiping |
+| `allowZoom` | `boolean` | `true` | Enable pinch-to-zoom |
+| `onClose` | `() => void` | - | Called when closing |
+| `showIndicator` | `boolean` | `true` | Show page indicator |
+
+## Usage
+
+### Basic Gallery
+
+```tsx
+import { ImagePreview } from 'prizmux'
+
+export default function App() {
+  const images = [
+    { uri: 'https://example.com/photo1.jpg' },
+    { uri: 'https://example.com/photo2.jpg' },
+    { uri: 'https://example.com/photo3.jpg' },
+  ]
+
+  return <ImagePreview images={images} />
+}
+```
+
+### With Initial Index
+
+```tsx
+<ImagePreview 
+  images={productImages}
+  initialIndex={2}
+/>
+```
+
+### Controlled Gallery
+
+```tsx
+import { ImagePreview, Button } from 'prizmux'
+import { useState } from 'react'
+import { View } from 'react-native'
+
+export default function Gallery() {
+  const [currentIndex, setCurrentIndex] = useState(0)
+
+  const images = [
+    { uri: 'https://example.com/photo1.jpg' },
+    { uri: 'https://example.com/photo2.jpg' },
+    { uri: 'https://example.com/photo3.jpg' },
+  ]
+
+  return (
+    <View style={{ flex: 1 }}>
+      <ImagePreview
+        images={images}
+        initialIndex={currentIndex}
+        onIndexChange={setCurrentIndex}
+      />
+      
+      <View style={{ flexDirection: 'row', gap: 8 }}>
+        <Button 
+          title="Previous"
+          disabled={currentIndex === 0}
+          onPress={() => setCurrentIndex(currentIndex - 1)}
+        />
+        <Button 
+          title="Next"
+          disabled={currentIndex === images.length - 1}
+          onPress={() => setCurrentIndex(currentIndex + 1)}
+        />
+      </View>
+    </View>
+  )
+}
+```
+
+### Modal Gallery
+
+```tsx
+import { ImagePreview, Button } from 'prizmux'
+import { useState } from 'react'
+import { View, Modal } from 'react-native'
+
+export default function ModalGallery() {
+  const [visible, setVisible] = useState(false)
+  
+  const images = [
+    { uri: 'https://example.com/photo1.jpg' },
+    { uri: 'https://example.com/photo2.jpg' },
+  ]
+
+  return (
+    <>
+      <Button 
+        title="View Gallery"
+        onPress={() => setVisible(true)}
+      />
+      
+      <Modal
+        visible={visible}
+        animationType="fade"
+      >
+        <View style={{ flex: 1, backgroundColor: '#000' }}>
+          <ImagePreview
+            images={images}
+            onClose={() => setVisible(false)}
+          />
+        </View>
+      </Modal>
+    </>
+  )
+}
+```
+
+### Product Gallery
+
+```tsx
+import { ImagePreview, Card, Text } from 'prizmux'
+import { useState } from 'react'
+import { View, Image, TouchableOpacity } from 'react-native'
+
+export default function ProductGallery() {
+  const [selectedIndex, setSelectedIndex] = useState(0)
+  
+  const images = product.images.map(url => ({ uri: url }))
+
+  return (
+    <View>
+      <ImagePreview
+        images={images}
+        initialIndex={selectedIndex}
+        onIndexChange={setSelectedIndex}
+      />
+      
+      <View style={{ flexDirection: 'row', gap: 8, marginTop: 12 }}>
+        {images.map((image, index) => (
+          <TouchableOpacity
+            key={index}
+            onPress={() => setSelectedIndex(index)}
+            style={{ 
+              borderWidth: index === selectedIndex ? 2 : 0,
+              borderRadius: 8,
+              overflow: 'hidden'
+            }}
+          >
+            <Image
+              source={image}
+              style={{ width: 60, height: 60 }}
+            />
+          </TouchableOpacity>
+        ))}
+      </View>
+    </View>
+  )
+}
+```
+
+## Gestures
+
+- **Swipe left/right** — Navigate between images
+- **Pinch** — Zoom in/out (when enabled)
+- **Double tap** — Auto-zoom to content
+- **Pan while zoomed** — Move around zoomed image
+
+## Notes
+
+- Images are cached for smooth scrolling
+- Zoom resets when swiping to next image
+- Supports both local and remote images
+- Page indicator shows current position
+- Optimized for performance with large galleries

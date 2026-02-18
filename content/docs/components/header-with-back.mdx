@@ -1,0 +1,190 @@
+---
+title: Header with Back
+description: A navigation header with back button and customization
+---
+
+# Header with Back
+
+HeaderWithBack is a navigation component that provides a header with a back button, title, and action buttons. Perfect for screen transitions and navigation flows.
+
+## Overview
+
+HeaderWithBack handles standard navigation patterns while remaining flexible for custom needs. It automatically manages safe area insets and provides haptic feedback.
+
+**Use it for:**
+- Screen headers
+- Navigation flows
+- Detail screens
+- Modal headers
+- Settings screens
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `title` | `string` | - | Header title |
+| `onBack` | `() => void` | - | Called when back button pressed |
+| `subtitle` | `string` | - | Optional subtitle |
+| `rightAction` | `React.ReactNode` | - | Right-side button/icon |
+| `onRightAction` | `() => void` | - | Right action callback |
+| `backIcon` | `React.ReactNode` | - | Custom back icon |
+| `safeArea` | `boolean` | `true` | Respect safe area |
+
+## Usage
+
+### Basic Header
+
+```tsx
+import { HeaderWithBack } from 'prizmux'
+
+export default function DetailsScreen() {
+  return (
+    <>
+      <HeaderWithBack
+        title="Product Details"
+        onBack={() => navigation.goBack()}
+      />
+      {/* Screen content */}
+    </>
+  )
+}
+```
+
+### With Subtitle
+
+```tsx
+<HeaderWithBack
+  title="Messages"
+  subtitle="John Doe"
+  onBack={() => navigation.goBack()}
+/>
+```
+
+### With Action Button
+
+```tsx
+import { HeaderWithBack } from 'prizmux'
+import { Share2 } from 'lucide-react-native'
+
+<HeaderWithBack
+  title="Article"
+  onBack={() => navigation.goBack()}
+  rightAction={<Share2 size={24} />}
+  onRightAction={() => shareArticle()}
+/>
+```
+
+### With Multiple Right Actions
+
+```tsx
+import { HeaderWithBack, Button } from 'prizmux'
+import { MoreVertical } from 'lucide-react-native'
+import { View } from 'react-native'
+
+<HeaderWithBack
+  title="Settings"
+  onBack={() => navigation.goBack()}
+  rightAction={
+    <View style={{ flexDirection: 'row', gap: 8 }}>
+      <Button icon={<Edit size={24} />} variant="ghost" />
+      <Button icon={<MoreVertical size={24} />} variant="ghost" />
+    </View>
+  }
+/>
+```
+
+### Custom Back Icon
+
+```tsx
+import { HeaderWithBack } from 'prizmux'
+import { ChevronLeft } from 'lucide-react-native'
+
+<HeaderWithBack
+  title="Screen Title"
+  backIcon={<ChevronLeft size={28} color="red" />}
+  onBack={() => navigation.goBack()}
+/>
+```
+
+### In Navigation Stack
+
+```tsx
+import { HeaderWithBack } from 'prizmux'
+import { useFocusEffect } from '@react-navigation/native'
+
+export default function ProfileScreen({ navigation }) {
+  useFocusEffect(() => {
+    navigation.setOptions({
+      header: () => (
+        <HeaderWithBack
+          title="Profile"
+          onBack={() => navigation.goBack()}
+          rightAction={<Edit size={24} />}
+          onRightAction={() => navigation.push('EditProfile')}
+        />
+      ),
+    })
+  })
+
+  return (
+    // Screen content
+  )
+}
+```
+
+### Modal Header
+
+```tsx
+import { HeaderWithBack } from 'prizmux'
+import { X } from 'lucide-react-native'
+
+<HeaderWithBack
+  title="Filter Options"
+  backIcon={<X size={24} />}
+  onBack={() => dismissModal()}
+/>
+```
+
+### With Loading State
+
+```tsx
+import { HeaderWithBack, Button } from 'prizmux'
+import { Save } from 'lucide-react-native'
+import { useState } from 'react'
+
+export default function EditScreen() {
+  const [saving, setSaving] = useState(false)
+
+  const handleSave = async () => {
+    setSaving(true)
+    await saveChanges()
+    setSaving(false)
+  }
+
+  return (
+    <>
+      <HeaderWithBack
+        title="Edit Profile"
+        onBack={() => navigation.goBack()}
+        rightAction={
+          <Button
+            icon={<Save size={20} />}
+            loading={saving}
+            variant="ghost"
+            onPress={handleSave}
+          />
+        }
+      />
+    </>
+  )
+}
+```
+
+## Notes
+
+- Automatically handles safe area insets on notched devices
+- Back button provides haptic feedback on press
+- Right action can be any component (Button, Icon, custom)
+- Title is automatically truncated if too long
+- Subtitle appears below title in smaller text
+- Respects system back gesture on iOS and Android

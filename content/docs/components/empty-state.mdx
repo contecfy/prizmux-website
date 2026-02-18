@@ -1,0 +1,204 @@
+---
+title: Empty State
+description: A component for displaying empty data states
+---
+
+# Empty State
+
+EmptyState is a component that displays helpful messaging when there's no data to show. Perfect for guiding users when content is unavailable.
+
+## Overview
+
+EmptyState combines an icon, title, description, and optional action to create a complete empty state experience. It helps users understand why nothing is displayed and what to do next.
+
+**Use it for:**
+- No search results
+- Empty lists or feeds
+- First-time user experiences
+- Data not available states
+- Error fallbacks
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `icon` | `React.ReactNode` | - | Icon to display |
+| `title` | `string` | - | Main message |
+| `description` | `string` | - | Secondary message |
+| `action` | `React.ReactNode` | - | Action button |
+| `onAction` | `() => void` | - | Action callback |
+| `variant` | `'default' \| 'compact'` | `'default'` | Layout variant |
+
+## Usage
+
+### Basic Empty State
+
+```tsx
+import { EmptyState } from 'prizmux'
+import { Search } from 'lucide-react-native'
+
+export default function SearchResults() {
+  return (
+    <EmptyState
+      icon={<Search size={48} />}
+      title="No Results"
+      description="Try adjusting your search terms"
+    />
+  )
+}
+```
+
+### With Action
+
+```tsx
+import { EmptyState, Button } from 'prizmux'
+import { Plus } from 'lucide-react-native'
+
+<EmptyState
+  icon={<Plus size={48} />}
+  title="No Items"
+  description="Create your first item to get started"
+  action={
+    <Button 
+      title="Create Item"
+      onPress={() => navigation.navigate('Create')}
+    />
+  }
+/>
+```
+
+### No Search Results
+
+```tsx
+import { EmptyState } from 'prizmux'
+import { SearchX } from 'lucide-react-native'
+
+function SearchList() {
+  const [results, setResults] = useState([])
+  const [query, setQuery] = useState('')
+
+  return (
+    <>
+      <SearchBar value={query} onChange={setQuery} />
+      {results.length === 0 ? (
+        <EmptyState
+          icon={<SearchX size={48} />}
+          title="No Results"
+          description={`No items found for "${query}"`}
+        />
+      ) : (
+        <List data={results} />
+      )}
+    </>
+  )
+}
+```
+
+### Empty Feed
+
+```tsx
+import { EmptyState, Button } from 'prizmux'
+import { Inbox } from 'lucide-react-native'
+
+<EmptyState
+  icon={<Inbox size={48} />}
+  title="Your Feed is Empty"
+  description="Follow users or add interests to see content"
+  action={
+    <Button
+      title="Find Users to Follow"
+      variant="primary"
+      onPress={() => navigation.navigate('Discover')}
+    />
+  }
+/>
+```
+
+### Error State
+
+```tsx
+import { EmptyState, Button } from 'prizmux'
+import { AlertCircle } from 'lucide-react-native'
+
+function LoadingScreen() {
+  const [error, setError] = useState(null)
+
+  return error ? (
+    <EmptyState
+      icon={<AlertCircle size={48} />}
+      title="Something Went Wrong"
+      description={error.message}
+      action={
+        <Button 
+          title="Try Again"
+          onPress={() => retryLoad()}
+        />
+      }
+    />
+  ) : (
+    <LoadingList />
+  )
+}
+```
+
+### Compact Variant
+
+```tsx
+<EmptyState
+  icon={<Archive size={32} />}
+  title="Archived"
+  description="No archived items"
+  variant="compact"
+/>
+```
+
+### No Favorites
+
+```tsx
+import { EmptyState, Button } from 'prizmux'
+import { Heart } from 'lucide-react-native'
+
+function FavoritesScreen() {
+  return (
+    <EmptyState
+      icon={<Heart size={48} />}
+      title="No Favorites Yet"
+      description="Items you favorite will appear here"
+      action={
+        <Button
+          title="Browse Items"
+          onPress={() => navigation.navigate('Explore')}
+        />
+      }
+    />
+  )
+}
+```
+
+### Offline State
+
+```tsx
+import { EmptyState, Button } from 'prizmux'
+import { WifiOff } from 'lucide-react-native'
+
+<EmptyState
+  icon={<WifiOff size={48} />}
+  title="You're Offline"
+  description="Check your internet connection"
+  action={
+    <Button
+      title="Retry"
+      onPress={() => refetch()}
+    />
+  }
+/>
+```
+
+## Notes
+
+- Use meaningful icons that relate to the empty state
+- Keep titles concise and action-oriented
+- Descriptions can provide helpful context
+- Action button is optional but recommended
+- Automatically scales on different screen sizes
+- Works in both light and dark modes

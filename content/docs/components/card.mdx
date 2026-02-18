@@ -1,0 +1,146 @@
+---
+title: Card
+description: A composable container for grouping related content
+---
+
+# Card
+
+Card is a flexible container component that provides a consistent surface for grouping related content. It's designed for maximum composability.
+
+## Overview
+
+Card acts as a container with built-in styling for borders, shadows, and spacing. Combine it with other components to create complex layouts.
+
+**Use it for:**
+- Content containers
+- Information cards
+- Product listings
+- Settings panels
+- Data summaries
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | Card content |
+| `variant` | `'filled' \| 'outline'` | `'filled'` | Visual style |
+| `padding` | `'sm' \| 'md' \| 'lg'` | `'md'` | Internal spacing |
+| `onPress` | `() => void` | - | Make card pressable |
+| `disabled` | `boolean` | `false` | Disable interactions |
+
+## Usage
+
+### Basic Card
+
+```tsx
+import { Card, Text } from 'prizmux'
+
+export default function App() {
+  return (
+    <Card>
+      <Text>Card content goes here</Text>
+    </Card>
+  )
+}
+```
+
+### Outline Variant
+
+```tsx
+<Card variant="outline">
+  <Text>This card has a border</Text>
+</Card>
+```
+
+### Pressable Card
+
+```tsx
+const [selected, setSelected] = useState(false)
+
+<Card 
+  onPress={() => setSelected(!selected)}
+  style={{ borderWidth: selected ? 2 : 0 }}
+>
+  <Text>Tap me to select</Text>
+</Card>
+```
+
+### Complex Layout
+
+```tsx
+import { Card, Text, Button } from 'prizmux'
+import { Share2 } from 'lucide-react-native'
+
+export default function ProductCard() {
+  return (
+    <Card padding="lg">
+      <Text variant="title">Product Name</Text>
+      <Text variant="caption">$99.99</Text>
+      
+      <View style={{ gap: 8, marginTop: 16 }}>
+        <Text numberOfLines={2}>
+          Product description goes here
+        </Text>
+      </View>
+      
+      <View style={{ flexDirection: 'row', gap: 8, marginTop: 16 }}>
+        <Button title="Add to Cart" style={{ flex: 1 }} />
+        <Button 
+          icon={<Share2 size={18} />} 
+          variant="outline"
+        />
+      </View>
+    </Card>
+  )
+}
+```
+
+### With Image
+
+```tsx
+import { Card, Image, Text } from 'prizmux'
+
+<Card>
+  <Image 
+    source={{ uri: 'https://example.com/image.jpg' }}
+    style={{ width: '100%', height: 200 }}
+  />
+  <View style={{ padding: 16 }}>
+    <Text variant="title">Image Title</Text>
+  </View>
+</Card>
+```
+
+## Composition Patterns
+
+Card works best when composed with other components:
+
+```tsx
+// Profile card
+<Card>
+  <ProfileHeader />
+  <Divider />
+  <ProfileStats />
+  <Divider />
+  <ProfileActions />
+</Card>
+
+// List item card
+<Card onPress={() => navigate('detail')}>
+  <ListItemContent />
+</Card>
+
+// Form card
+<Card>
+  <FormFields />
+  <FormActions />
+</Card>
+```
+
+## Notes
+
+- Use Card as a container, not for complex layouts
+- Combine padding prop with custom View styles for fine-grained control
+- Pressable cards automatically show feedback on press
+- Card respects theme colors automatically
+- Perfect for implementing list items

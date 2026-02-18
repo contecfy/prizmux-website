@@ -1,0 +1,107 @@
+---
+title: Button
+description: A versatile button component for all your interactive needs
+---
+
+# Button
+
+The Button component is the foundation of user interactions in your app. It supports multiple variants, sizes, and states out of the box.
+
+## Overview
+
+Button is a flexible component that handles touch interactions, loading states, and disabled states. It's fully typed and accessible by default.
+
+**Use it for:**
+- Primary actions in your UI
+- Form submissions
+- Navigation triggers
+- Any interactive element requiring user action
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `title` | `string` | - | The button label text |
+| `onPress` | `() => void` | - | Callback when button is pressed |
+| `variant` | `'primary' \| 'secondary' \| 'outline'` | `'primary'` | Visual style variant |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Button size |
+| `disabled` | `boolean` | `false` | Disable user interactions |
+| `loading` | `boolean` | `false` | Show loading state |
+| `icon` | `React.ReactNode` | - | Icon to display |
+| `iconPosition` | `'left' \| 'right'` | `'left'` | Icon placement |
+
+## Usage
+
+### Basic Button
+
+```tsx
+import { Button } from 'prizmux'
+
+export default function App() {
+  return (
+    <Button 
+      title="Press Me" 
+      onPress={() => alert('Button pressed!')}
+    />
+  )
+}
+```
+
+### Variants
+
+```tsx
+<Button title="Primary" variant="primary" />
+<Button title="Secondary" variant="secondary" />
+<Button title="Outline" variant="outline" />
+```
+
+### Sizes
+
+```tsx
+<Button title="Small" size="sm" />
+<Button title="Medium" size="md" />
+<Button title="Large" size="lg" />
+```
+
+### With Icon
+
+```tsx
+import { Button } from 'prizmux'
+import { ChevronRight } from 'lucide-react-native'
+
+export default function App() {
+  return (
+    <Button 
+      title="Next" 
+      icon={<ChevronRight size={18} />}
+      iconPosition="right"
+    />
+  )
+}
+```
+
+### Loading State
+
+```tsx
+const [loading, setLoading] = useState(false)
+
+const handleSubmit = async () => {
+  setLoading(true)
+  await submitForm()
+  setLoading(false)
+}
+
+<Button 
+  title="Submit" 
+  loading={loading}
+  onPress={handleSubmit}
+/>
+```
+
+## Notes
+
+- The button automatically handles opacity changes on press
+- Loading state disables user interaction automatically
+- Accessibility features are built-in (press states, labels)
+- Works with custom icon libraries (Lucide, Font Awesome, etc.)
+- Full TypeScript support with IntelliSense

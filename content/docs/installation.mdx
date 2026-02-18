@@ -1,0 +1,109 @@
+---
+title: Installation
+description: Get Prizmux set up in your React Native project
+---
+
+# Installation
+
+Get Prizmux installed and ready to use in your project with just a few steps.
+
+## Prerequisites
+
+- React Native 0.60 or higher
+- React 16.8 or higher
+- Node.js 14+
+
+## Install via npm
+
+```bash
+npm install prizmux
+```
+
+## Install via yarn
+
+```bash
+yarn add prizmux
+```
+
+## Install via pnpm
+
+```bash
+pnpm add prizmux
+```
+
+## Basic Setup
+
+Once installed, you can start using components immediately:
+
+```tsx
+import { Button } from 'prizmux'
+
+export default function App() {
+  return (
+    <Button 
+      title="Press Me" 
+      onPress={() => console.log('Pressed!')}
+    />
+  )
+}
+```
+
+## TypeScript Support
+
+Prizmux comes with full TypeScript support. All components are fully typed with JSDoc comments for better IDE autocomplete:
+
+```tsx
+import { Button, ButtonProps } from 'prizmux'
+
+const handlePress: ButtonProps['onPress'] = () => {
+  console.log('Button pressed')
+}
+
+export default function App() {
+  return <Button title="Press Me" onPress={handlePress} />
+}
+```
+
+## Peer Dependencies
+
+Prizmux requires very few peer dependencies:
+
+- `react-native` - The React Native framework
+- `react` - React library
+- `react-native-gesture-handler` - For gesture support (optional, but recommended)
+
+That's it! No heavy dependencies to worry about.
+
+## Troubleshooting
+
+### Component not found
+Make sure you're importing from the main `prizmux` package:
+
+```tsx
+// ✅ Correct
+import { Button } from 'prizmux'
+
+// ❌ Wrong
+import { Button } from 'prizmux/lib/components'
+```
+
+### TypeScript errors
+Ensure your `tsconfig.json` includes:
+
+```json
+{
+  "compilerOptions": {
+    "strict": true,
+    "skipLibCheck": true
+  }
+}
+```
+
+### Still having issues?
+Check out the [GitHub Issues](https://github.com/prizmux/prizmux/issues) or open a new discussion on our [Community](/docs/community).
+
+## Next Steps
+
+- Explore [Components](/docs/components) to see what's available
+- Read the [Philosophy](/docs/philosophy) behind Prizmux
+- Check out [Examples](/docs/examples) for real-world usage patterns

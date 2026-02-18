@@ -1,0 +1,230 @@
+---
+title: Phone Input
+description: A formatted phone number input with international support
+---
+
+# Phone Input
+
+PhoneInput is a specialized text input component that automatically formats phone numbers and provides country selection. It handles validation and different phone formats.
+
+## Overview
+
+PhoneInput combines phone number formatting with validation. It supports multiple countries, automatically detects format, and provides a clean user experience for phone entry.
+
+**Use it for:**
+- User registration forms
+- Contact information collection
+- Call/SMS features
+- Appointment booking
+- Two-factor authentication
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | - | Current phone number |
+| `onChange` | `(value: string) => void` | - | Called when value changes |
+| `onCountryChange` | `(code: string) => void` | - | Called when country changes |
+| `defaultCountry` | `string` | `'US'` | Initial country code |
+| `disabled` | `boolean` | `false` | Disable input |
+| `error` | `string` | - | Error message |
+| `placeholder` | `string` | - | Placeholder text |
+
+## Usage
+
+### Basic Phone Input
+
+```tsx
+import { PhoneInput } from 'prizmux'
+import { useState } from 'react'
+
+export default function SignUp() {
+  const [phone, setPhone] = useState('')
+
+  return (
+    <PhoneInput
+      value={phone}
+      onChange={setPhone}
+      placeholder="Enter phone number"
+    />
+  )
+}
+```
+
+### With Default Country
+
+```tsx
+<PhoneInput
+  value={phone}
+  onChange={setPhone}
+  defaultCountry="GB"
+  placeholder="+44"
+/>
+```
+
+### With Country Change Handling
+
+```tsx
+import { PhoneInput } from 'prizmux'
+import { useState } from 'react'
+
+export default function ContactForm() {
+  const [phone, setPhone] = useState('')
+  const [country, setCountry] = useState('US')
+
+  return (
+    <>
+      <PhoneInput
+        value={phone}
+        onChange={setPhone}
+        defaultCountry={country}
+        onCountryChange={setCountry}
+      />
+      <Text>Country Code: {country}</Text>
+    </>
+  )
+}
+```
+
+### Form Integration
+
+```tsx
+import { PhoneInput, Button, Text } from 'prizmux'
+import { useState } from 'react'
+import { View } from 'react-native'
+
+export default function RegistrationForm() {
+  const [phone, setPhone] = useState('')
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+
+  const validatePhone = (value) => {
+    if (!value) {
+      setError('Phone number is required')
+      return false
+    }
+    if (value.length < 10) {
+      setError('Phone number is too short')
+      return false
+    }
+    setError('')
+    return true
+  }
+
+  const handleSubmit = async () => {
+    if (!validatePhone(phone)) return
+
+    setLoading(true)
+    try {
+      await registerPhone(phone)
+      // Success
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <View style={{ gap: 16 }}>
+      <PhoneInput
+        value={phone}
+        onChange={setPhone}
+        error={error}
+        placeholder="Phone number"
+      />
+      {error && <Text style={{ color: 'red' }}>{error}</Text>}
+      <Button
+        title="Verify"
+        loading={loading}
+        onPress={handleSubmit}
+      />
+    </View>
+  )
+}
+```
+
+### Two-Factor Authentication
+
+```tsx
+import { PhoneInput, Button, Text } from 'prizmux'
+import { useState } from 'react'
+import { View } from 'react-native'
+
+export default function TwoFactorSetup() {
+  const [phone, setPhone] = useState('')
+  const [verified, setVerified] = useState(false)
+
+  const handleSendCode = async () => {
+    const result = await sendVerificationCode(phone)
+    if (result.success) {
+      setVerified(true)
+      // Navigate to code verification screen
+    }
+  }
+
+  return (
+    <View style={{ gap: 16 }}>
+      <Text variant="title">Add Phone Number</Text>
+      <Text variant="caption">
+        We'll send you a code to verify
+      </Text>
+      
+      <PhoneInput
+        value={phone}
+        onChange={setPhone}
+        placeholder="Phone number"
+        disabled={verified}
+      />
+      
+      {!verified && (
+        <Button
+          title="Send Code"
+          onPress={handleSendCode}
+        />
+      )}
+    </View>
+  )
+}
+```
+
+### International Numbers
+
+```tsx
+import { PhoneInput } from 'prizmux'
+
+// Automatically formats based on country
+<PhoneInput
+  value={phone}
+  onChange={setPhone}
+  defaultCountry="DE"
+  // Shows German format: +49 XXXX XXXX
+/>
+
+<PhoneInput
+  value={phone}
+  onChange={setPhone}
+  defaultCountry="JP"
+  // Shows Japanese format: +81 XX XXXX XXXX
+/>
+```
+
+## Formatting
+
+PhoneInput automatically formats numbers based on selected country:
+
+- **US**: `(123) 456-7890`
+- **UK**: `+44 1632 960291`
+- **Germany**: `+49 30 11001100`
+- **France**: `+33 1 42 68 53 00`
+- **Others**: International format maintained
+
+## Notes
+
+- Automatically adds country code prefix
+- Handles paste events with auto-formatting
+- Validates format in real-time
+- Supports all country codes
+- Keyboard type set to phone-pad automatically
+- Error state integrated for form validation
+- International format compliance

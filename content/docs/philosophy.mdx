@@ -1,0 +1,104 @@
+---
+title: Philosophy
+description: The principles behind Prizmux component design
+---
+
+# Philosophy
+
+Prizmux was built on a set of core principles that guide every design decision. Understanding this philosophy will help you get the most out of the library.
+
+## 1. Minimal Dependencies
+
+Every dependency added to a library becomes a transitive dependency for your application. We believe in being extremely conservative about this.
+
+Each component in Prizmux is designed to avoid unnecessary packages. When external packages are needed, they're carefully selected for maturity and minimal surface area.
+
+**Result**: Smaller bundle sizes, fewer version conflicts, and less maintenance overhead for your project.
+
+## 2. Explicit Over Implicit
+
+We prefer clear, explicit APIs over hidden magic. This means:
+
+- Props are fully typed and well-documented
+- No global configuration that affects component behavior
+- Predictable component behavior
+- Easy to debug when something doesn't work as expected
+
+```tsx
+// Explicit - you know exactly what's happening
+<Button 
+  title="Submit" 
+  variant="primary"
+  size="lg"
+  onPress={handleSubmit}
+/>
+```
+
+## 3. Composition Over Inheritance
+
+Components are designed to be composed together, not extended. This makes it easy to build complex UIs by combining simple, focused components.
+
+```tsx
+// ✅ Compose components together
+<Card>
+  <Header title="Profile" />
+  <Content>
+    <Avatar />
+    <Text>John Doe</Text>
+  </Content>
+</Card>
+
+// ❌ Don't extend components
+class ExtendedCard extends Card {
+  // ...
+}
+```
+
+## 4. Accessibility First
+
+Every component is built with accessibility in mind from day one:
+
+- Keyboard navigation support
+- Screen reader compatibility
+- High contrast mode support
+- ARIA labels and roles where applicable
+
+Accessibility isn't an afterthought—it's part of the design.
+
+## 5. Flexibility in Design
+
+We don't force a specific design system on you. Components are:
+
+- Styleable with your own theme
+- Compatible with custom icons
+- Adaptable to different platforms
+- Customizable through slots and render props
+
+You bring the design, we provide the component logic.
+
+## 6. Production Ready
+
+Prizmux components are battle-tested in production applications:
+
+- Handle edge cases gracefully
+- Perform well with large datasets
+- Support loading and error states
+- Built with performance in mind
+
+## Design Decisions
+
+### Why no styled-components?
+We avoid CSS-in-JS libraries to reduce bundle size and improve consistency with React Native's native styling.
+
+### Why TypeScript only?
+We believe type safety improves developer experience and catches bugs early. The entire library is written in TypeScript.
+
+### Why bring your own icons?
+Icon libraries are a significant source of bloat. We let you choose the icon library that works best for your project.
+
+### Why minimal theming?
+Heavy theming systems add complexity. Prizmux provides simple theming through React context, letting you build on top of it if needed.
+
+---
+
+These principles ensure Prizmux remains lightweight, maintainable, and developer-friendly.
