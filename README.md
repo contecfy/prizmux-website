@@ -1,36 +1,157 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Prizmux Website
 
-## Getting Started
+The official documentation website for [Prizmux](https://npmjs.com/package/prizmux) — a developer-first React Native component system.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Stack
+
+- **Framework** — [Next.js](https://nextjs.org) (App Router)
+- **Styling** — [Tailwind CSS](https://tailwindcss.com)
+- **Docs** — [Contentlayer](https://contentlayer.dev) + MDX
+- **Theme** — Dark / Light (system default, user toggleable)
+- **Deployment** — [Vercel](https://vercel.com)
+
+---
+
+## Project Structure
+
+```
+prizmux-web/
+  app/
+    layout.tsx              # Root layout, theme provider
+    page.tsx                # Landing page
+    docs/
+      layout.tsx            # Docs layout with sidebar
+      page.tsx              # Docs index → redirects to /docs/introduction
+      [slug]/
+        page.tsx            # Dynamic doc page renderer
+  components/
+    navbar.tsx              # Top nav — logo, GitHub, npm, theme toggle
+    sidebar.tsx             # Left sidebar with doc navigation
+    code-block.tsx          # Syntax highlighted code block
+    theme-toggle.tsx        # Dark / light switcher
+  content/
+    docs/
+      introduction.mdx
+      installation.mdx
+      components/
+        button.mdx
+        card.mdx
+        bottom-sheet.mdx
+        image-preview.mdx
+        header-with-back.mdx
+        empty-state.mdx
+        phone-input.mdx
+  public/
+    og.png                  # Open Graph image
+  styles/
+    globals.css
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Pages
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Landing `/`
+- Hero — package name, one-line description, install command, GitHub + Docs buttons
+- Feature grid — 4 cards: Zero dependencies, Fully typed, Bring your own icons, Production ready
+- Component list — quick visual summary of all 7 components
+- Footer — npm link, GitHub link, license
 
-## Learn More
+### Docs `/docs`
+Sidebar navigation with the following structure:
 
-To learn more about Next.js, take a look at the following resources:
+```
+Getting Started
+  Introduction
+  Installation
+  Philosophy
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Components
+  Button
+  Card
+  BottomSheet
+  ImagePreview
+  HeaderWithBack
+  EmptyState
+  PhoneInput
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Each component page covers:
+- Overview — what it is and when to use it
+- Props table — all props, types, defaults, and descriptions
+- Usage — copy-paste code examples
+- Notes — edge cases, tips, dependency decisions
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Design
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Colors** — black and white only. No brand color on the site itself.
+- **Typography** — `Geist` (same font as Vercel/shadcn docs)
+- **Dark mode** — `#09090b` background, `#fafafa` text
+- **Light mode** — `#ffffff` background, `#09090b` text
+- **Code blocks** — `github-dark` theme in dark mode, `github-light` in light mode
+- **No heavy animations** — page transitions only, no scroll-triggered effects
+- **Sidebar** — fixed left, scrollable, active item highlighted with a left border accent
+
+---
+
+## Getting Started (local dev)
+
+```bash
+git clone https://github.com/your-username/prizmux-web
+cd prizmux-web
+npm install
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+---
+
+## Writing Docs
+
+All documentation lives in `/content/docs` as `.mdx` files. To add or edit a component page:
+
+```mdx
+---
+title: Button
+description: A pressable component with variants, sizes, and icon support.
+---
+
+## Overview
+
+...
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| title | string | — | Label text |
+| variant | filled \| outline | filled | Visual style |
+
+## Usage
+
+```tsx
+<Button title="Submit" variant="filled" onPress={() => {}} />
+```
+```
+
+---
+
+## Deployment
+
+The site deploys automatically to Vercel on every push to `main`.
+
+```bash
+# Manual deploy
+npx vercel --prod
+```
+
+---
+
+## License
+
+MIT — same as the package itself.
