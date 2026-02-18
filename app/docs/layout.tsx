@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import { Footer } from "@/components/Footer"
 import { Sidebar } from "@/components/SideBar"
 
 export const metadata: Metadata = {
@@ -26,8 +25,7 @@ export default function DocsLayout({ children }: DocsLayoutProps) {
           {children}
         </div>
 
-        {/* Footer constrained to content width */}
-        <Footer />
+        {/* Footer constrained to content width is rendered at root layout to avoid duplication */}
       </div>
     </div>
   )

@@ -2,7 +2,7 @@
 
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
-import { Sun, Moon } from "lucide-react"
+import { Flashlight, FlashlightOff } from "lucide-react"
 
 export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme()
@@ -23,9 +23,9 @@ export function ThemeToggle() {
       aria-label="Toggle theme"
     >
       {isDark ? (
-        <Sun className="h-4 w-4" />
+        <Flashlight className="h-4 w-4" />
       ) : (
-        <Moon className="h-4 w-4" />
+        <FlashlightOff className="h-4 w-4" />
       )}
     </button>
   )

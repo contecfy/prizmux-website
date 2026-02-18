@@ -14,8 +14,9 @@ export function Navbar() {
     { href: "/docs", label: "docs" },
     { href: "/changelog", label: "changelogs" },
     { href: "/blogs", label: "blogs" },
-    { href: "/community", label: "community" },
-    { href: "/enterprise", label: "enterprise" },
+    // { href: "/community", label: "community" },
+    // { href: "/enterprise", label: "enterprise" },
+    { href: "/license", label: "license" },
   ]
 
   return (
@@ -53,10 +54,24 @@ export function Navbar() {
         {/* Far Right — Icons */}
         <div className="flex items-center gap-3 sm:gap-4">
           <a
+            href="https://www.npmjs.com/package/prizmux"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Prizmux on npm"
+            className="hover:opacity-90 transition-opacity"
+          >
+            <svg className="w-6 h-6" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img">
+              <rect width="24" height="24" rx="3" fill="#CB3837" />
+              <text x="50%" y="57%" textAnchor="middle" fontFamily="Arial, Helvetica, sans-serif" fontSize="9" fill="white" fontWeight="700">npm</text>
+            </svg>
+          </a>
+
+          <a
             href="https://github.com/your-username/prizmux"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:opacity-80 transition-opacity"
+            aria-label="Prizmux on GitHub"
           >
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.207 11.387.6.113.793-.263.793-.583v-2.234c-3.338.724-4.033-1.613-4.033-1.613-.546-1.387-1.333-1.756-1.333-1.756-1.09-.746.083-.73.083-.73 1.205.085 1.84 1.238 1.84 1.238 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.605-2.665-.303-5.467-1.332-5.467-5.93 0-1.31.47-2.38 1.235-3.22-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.3 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.288-1.552 3.295-1.23 3.295-1.23.654 1.653.243 2.873.12 3.176.77.84 1.233 1.91 1.233 3.22 0 4.61-2.807 5.625-5.48 5.921.43.37.823 1.096.823 2.21v3.293c0 .323.192.699.8.58C20.565 21.795 24 17.297 24 12c0-6.63-5.37-12-12-12z" />

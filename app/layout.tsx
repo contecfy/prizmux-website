@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "Prizmux - React Native Component Library",
   description: "Build beautiful, performant React Native apps with production-ready components. Prizmux offers a comprehensive component library with best practices and accessibility built-in.",
   keywords: ["React Native", "Components", "UI Library", "Mobile Development", "TypeScript", "React"],
-  authors: [{ name: "Lukwago Joel Jr", url: "https://github.com/lukwago-jr" }],
+  authors: [{ name: "Lukwago Joel Jr", url: "https://github.com/lukwago-joel-jr" }],
   creator: "Lukwago Joel Jr",
   publisher: "Prizmux",
   openGraph: {
