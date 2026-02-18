@@ -33,9 +33,21 @@ body {
 pre {
   padding: 1rem;
   overflow-x: auto;
-  background: transparent !important;
 }
 
 code {
   font-family: var(--font-geist-mono), monospace;
+}
+
+/* Allow syntax-highlighting libraries (Shiki) to control colors
+   inside code/pre blocks — prevent prose from forcing a single color. */
+.prose :where(pre, code),
+.prose pre.shiki, .prose .shiki {
+  color: unset;
+}
+
+/* Ensure Shiki's inline/background styles show through inside its output. */
+pre.shiki, pre.shiki * {
+  background: unset;
+  color: unset;
 }

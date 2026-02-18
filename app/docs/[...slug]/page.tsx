@@ -5,16 +5,29 @@ import { getMDXComponent } from "next-contentlayer/hooks"
 import { CodeBlock } from "@/components/code-block"
 
 interface PageProps {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string[] }>
 }
 
 const mdxComponents: MDXComponents = {
-  code: (props) => <CodeBlock {...props} />,
+  // keep inline code as a regular <code> element
+  code: (props) => <code {...props} />,
+  // MDX wraps fenced code blocks as <pre><code className="language-...">..</code></pre>
+  // Map `pre` to a component that extracts the inner <code> and forwards it
+  // to our `CodeBlock` component so it renders a block-level element.
+  pre: (props) => {
+    const child = props.children as any
+    if (child?.props && child.props.mdxType === 'code') {
+      return <CodeBlock {...child.props} />
+    }
+    // fallback to default pre
+    return <pre {...props} />
+  },
 }
 
 export default async function DocPage({ params }: PageProps) {
   const { slug } = await params
-  const doc = allDocs.find((d: any) => d.slug === slug)
+  const slugPath = slug.join('/')
+  const doc = allDocs.find((d: any) => d.slug === slugPath)
 
   if (!doc) notFound()
 
