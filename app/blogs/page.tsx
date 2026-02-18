@@ -1,4 +1,11 @@
+import type { Metadata } from "next"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+  title: "Blog | Prizmux",
+  description: "Learn tips, tricks, and best practices for building with Prizmux. Tutorials, design patterns, and real-world case studies.",
+  authors: [{ name: "Lukwago Joel Jr", url: "https://github.com/lukwago-jr" }],
+}
 
 export default function BlogsPage() {
   return (

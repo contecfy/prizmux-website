@@ -1,4 +1,11 @@
+import type { Metadata } from "next"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+  title: "Changelog | Prizmux",
+  description: "Track updates, improvements, and new features in Prizmux. View all version releases and breaking changes.",
+  authors: [{ name: "Lukwago Joel Jr", url: "https://github.com/lukwago-jr" }],
+}
 
 export default function ChangelogPage() {
   return (
