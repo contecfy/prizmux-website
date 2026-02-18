@@ -28,3 +28,14 @@ body {
   color: var(--foreground);
   font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
+
+
+pre {
+  padding: 1rem;
+  overflow-x: auto;
+  background: transparent !important;
+}
+
+code {
+  font-family: var(--font-geist-mono), monospace;
+}

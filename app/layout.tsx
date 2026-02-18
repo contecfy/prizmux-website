@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/Nav"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { Footer } from "@/components/Footer"
 
 export default function RootLayout({
   children,
@@ -17,7 +18,9 @@ export default function RootLayout({
         >
           <Navbar/>
           <main>{children}</main>
+          <Footer/>
         </ThemeProvider>
+
       </body>
     </html>
   )
