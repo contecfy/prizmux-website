@@ -29,7 +29,6 @@ body {
   font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
 
-
 pre {
   padding: 1rem;
   overflow-x: auto;
@@ -50,4 +49,18 @@ code {
 pre.shiki, pre.shiki * {
   background: unset;
   color: unset;
+}
+
+/* Prose content styling */
+.prose-content {
+  @apply space-y-6;
+}
+
+.prose-content h2 + p,
+.prose-content h3 + p {
+  @apply mt-2;
+}
+
+.prose-content > div > h2:first-of-type {
+  @apply mt-0;
 }

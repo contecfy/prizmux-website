@@ -1,146 +1,161 @@
 ---
 title: Card
-description: A composable container for grouping related content
+description: A flexible container component with built-in shadows and styling
 ---
 
-# Card
 
-Card is a flexible container component that provides a consistent surface for grouping related content. It's designed for maximum composability.
+A lightweight, composable container component perfect for grouping related content. The Card component provides consistent styling, shadows, and borders out of the box.
 
 ## Overview
 
-Card acts as a container with built-in styling for borders, shadows, and spacing. Combine it with other components to create complex layouts.
+The Card component is a simple but powerful building block. It wraps content with predefined styling and spacing, making it easy to create visually consistent layouts.
 
 **Use it for:**
 - Content containers
-- Information cards
-- Product listings
-- Settings panels
-- Data summaries
+- List items  
+- Grouped information sections
+- Cards in grid layouts
+- Composable layouts
 
-## Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `React.ReactNode` | - | Card content |
-| `variant` | `'filled' \| 'outline'` | `'filled'` | Visual style |
-| `padding` | `'sm' \| 'md' \| 'lg'` | `'md'` | Internal spacing |
-| `onPress` | `() => void` | - | Make card pressable |
-| `disabled` | `boolean` | `false` | Disable interactions |
-
-## Usage
-
-### Basic Card
+## Basic Usage
 
 ```tsx
-import { Card, Text } from 'prizmux'
+import { Card } from 'prizmux'
+import { View, Text } from 'react-native'
 
 export default function App() {
   return (
     <Card>
-      <Text>Card content goes here</Text>
+      <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
+        Hello, World!
+      </Text>
+      <Text style={{ marginTop: 8, color: '#666' }}>
+        This is a Card component.
+      </Text>
     </Card>
   )
 }
 ```
 
-### Outline Variant
+## With Complex Content
+
+Cards work perfectly with other components:
 
 ```tsx
-<Card variant="outline">
-  <Text>This card has a border</Text>
-</Card>
-```
-
-### Pressable Card
-
-```tsx
-const [selected, setSelected] = useState(false)
-
-<Card 
-  onPress={() => setSelected(!selected)}
-  style={{ borderWidth: selected ? 2 : 0 }}
->
-  <Text>Tap me to select</Text>
-</Card>
-```
-
-### Complex Layout
-
-```tsx
-import { Card, Text, Button } from 'prizmux'
-import { Share2 } from 'lucide-react-native'
+import { Card, Button } from 'prizmux'
+import { View, Text, Image } from 'react-native'
 
 export default function ProductCard() {
   return (
-    <Card padding="lg">
-      <Text variant="title">Product Name</Text>
-      <Text variant="caption">$99.99</Text>
+    <Card>
+      <Image 
+        source={{ uri: 'https://example.com/product.jpg' }}
+        style={{ width: '100%', height: 200, borderRadius: 8 }}
+      />
       
-      <View style={{ gap: 8, marginTop: 16 }}>
-        <Text numberOfLines={2}>
-          Product description goes here
+      <View style={{ marginTop: 12 }}>
+        <Text style={{ fontSize: 16, fontWeight: '600' }}>
+          Amazing Product
+        </Text>
+        <Text style={{ marginTop: 8, color: '#666' }}>
+          $19.99
         </Text>
       </View>
       
-      <View style={{ flexDirection: 'row', gap: 8, marginTop: 16 }}>
-        <Button title="Add to Cart" style={{ flex: 1 }} />
-        <Button 
-          icon={<Share2 size={18} />} 
-          variant="outline"
-        />
-      </View>
+      <Button 
+        title="Add to Cart"
+        fullWidth={true}
+        style={{ marginTop: 16 }}
+        onPress={() => {}}
+      />
     </Card>
   )
 }
 ```
 
-### With Image
+## Multiple Cards
+
+Perfect for creating lists and grids:
 
 ```tsx
-import { Card, Image, Text } from 'prizmux'
+import { Card } from 'prizmux'
+import { ScrollView, Text, View } from 'react-native'
 
-<Card>
-  <Image 
-    source={{ uri: 'https://example.com/image.jpg' }}
-    style={{ width: '100%', height: 200 }}
-  />
-  <View style={{ padding: 16 }}>
-    <Text variant="title">Image Title</Text>
-  </View>
-</Card>
+const items = [
+  { id: 1, title: 'Item 1', description: 'First item' },
+  { id: 2, title: 'Item 2', description: 'Second item' },
+  { id: 3, title: 'Item 3', description: 'Third item' },
+]
+
+export default function App() {
+  return (
+    <ScrollView style={{ padding: 16 }}>
+      <View style={{ gap: 12 }}>
+        {items.map(item => (
+          <Card key={item.id}>
+            <Text style={{ fontSize: 16, fontWeight: '600' }}>
+              {item.title}
+            </Text>
+            <Text style={{ marginTop: 8, color: '#666' }}>
+              {item.description}
+            </Text>
+          </Card>
+        ))}
+      </View>
+    </ScrollView>
+  )
+}
 ```
 
-## Composition Patterns
+## Custom Styling
 
-Card works best when composed with other components:
+Override the default Card styling as needed:
 
 ```tsx
-// Profile card
-<Card>
-  <ProfileHeader />
-  <Divider />
-  <ProfileStats />
-  <Divider />
-  <ProfileActions />
-</Card>
+import { Card } from 'prizmux'
+import { Text } from 'react-native'
 
-// List item card
-<Card onPress={() => navigate('detail')}>
-  <ListItemContent />
-</Card>
-
-// Form card
-<Card>
-  <FormFields />
-  <FormActions />
-</Card>
+export default function App() {
+  return (
+    <Card
+      style={{
+        backgroundColor: '#f0f0f0',
+        borderRadius: 8,
+        padding: 20,
+      }}
+    >
+      <Text>Custom styled card</Text>
+    </Card>
+  )
+}
 ```
 
-## Notes
+## Props Reference
 
-- Use Card as a container, not for complex layouts
-- Combine padding prop with custom View styles for fine-grained control
-- Pressable cards automatically show feedback on press
-- Card respects theme colors automatically
-- Perfect for implementing list items
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | **Required** | Card content |
+| `style` | `StyleProp<ViewStyle>` | - | Custom container styles |
+| `...props` | `ViewProps` | - | Any React Native View props |
+
+## Styling Details
+
+The Card component includes:
+- **Background**: White (`#FFFFFF`)
+- **Border Radius**: 12px
+- **Padding**: 16px
+- **Shadow**: Subtle shadow for depth
+- **Elevation**: Android elevation level 3
+
+## Best Practices
+
+✅ **Do:**
+- Use Cards to group related content
+- Combine with other components for rich layouts
+- Customize styling when needed
+- Use consistent spacing between Cards
+
+❌ **Don't:**
+- Nest Cards unnecessarily
+- Use Cards as page backgrounds
+- Override all default styles unnecessarily

@@ -3,37 +3,45 @@ title: Installation
 description: Get Prizmux set up in your React Native project
 ---
 
-# Installation
 
-Get Prizmux installed and ready to use in your project with just a few steps.
+Get Prizmux installed and ready to use in your project. This guide will walk you through the setup process.
 
 ## Prerequisites
 
-- React Native 0.60 or higher
-- React 16.8 or higher
-- Node.js 14+
+Before installing Prizmux, ensure you have the following installed:
 
-## Install via npm
+- **React Native** 0.60 or higher
+- **React** 16.8 or higher  
+- **Node.js** 14 or higher
 
+## Install the Package
+
+Choose your preferred package manager to install Prizmux:
+
+<div className="space-y-4 my-6">
+
+### npm
 ```bash
 npm install prizmux
 ```
 
-## Install via yarn
-
+### yarn
 ```bash
 yarn add prizmux
 ```
 
-## Install via pnpm
-
+### pnpm
 ```bash
 pnpm add prizmux
 ```
 
+</div>
+
+> If you're using a separate client and server setup, make sure to install Prizmux in all the parts of your project that need it.
+
 ## Basic Setup
 
-Once installed, you can start using components immediately:
+Once installed, you can start using Prizmux components immediately:
 
 ```tsx
 import { Button } from 'prizmux'
@@ -50,7 +58,7 @@ export default function App() {
 
 ## TypeScript Support
 
-Prizmux comes with full TypeScript support. All components are fully typed with JSDoc comments for better IDE autocomplete:
+Prizmux comes with **full TypeScript support out of the box**. All components are fully typed with JSDoc comments for better IDE autocomplete and type safety:
 
 ```tsx
 import { Button, ButtonProps } from 'prizmux'
@@ -66,17 +74,18 @@ export default function App() {
 
 ## Peer Dependencies
 
-Prizmux requires very few peer dependencies:
+Prizmux requires very few peer dependencies, keeping your bundle light and lean:
 
-- `react-native` - The React Native framework
-- `react` - React library
-- `react-native-gesture-handler` - For gesture support (optional, but recommended)
+- **react-native** — The React Native framework
+- **react** — React library
+- **react-native-gesture-handler** — For gesture support (optional, but recommended)
 
 That's it! No heavy dependencies to worry about.
 
 ## Troubleshooting
 
 ### Component not found
+
 Make sure you're importing from the main `prizmux` package:
 
 ```tsx
@@ -88,16 +97,23 @@ import { Button } from 'prizmux/lib/components'
 ```
 
 ### TypeScript errors
-Ensure your `tsconfig.json` includes:
+
+Ensure your `tsconfig.json` includes the following compiler options:
 
 ```json
 {
   "compilerOptions": {
     "strict": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node"
   }
 }
 ```
+
+## Next Steps
+
+Great! You're all set up. Now explore the [components](/docs/components) documentation to learn how to use each component in your project.
 
 ### Still having issues?
 Check out the [GitHub Issues](https://github.com/prizmux/prizmux/issues) or open a new discussion on our [Community](/docs/community).

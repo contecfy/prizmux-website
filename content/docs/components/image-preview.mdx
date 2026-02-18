@@ -1,33 +1,195 @@
 ---
-title: Image Preview
-description: A gallery component with zoom and swipe gestures
+title: ImagePreview
+description: A beautiful image gallery with zoom and swipe gestures
 ---
 
-# Image Preview
 
-ImagePreview is a gallery component that displays images with pinch-to-zoom, swipe-to-navigate, and smooth animations.
+A full-featured image gallery component with pinch-to-zoom, swipe-to-navigate, and smooth animations. Perfect for displaying photos, products, and media galleries.
 
 ## Overview
 
-ImagePreview provides a full-featured image viewing experience with gesture support. Perfect for displaying photos, product images, and media galleries.
+ImagePreview provides a native-like viewing experience for images. It handles gestures automatically and provides a polished, intuitive interface for image browsing.
 
 **Use it for:**
-- Photo galleries
+- Photo galleries and albums
 - Product image viewers
-- Media albums
-- Document previews
+- Media previews
 - Portfolio displays
+- Document image viewing
 
-## Props
+## Basic Usage
+
+```tsx
+import { ImagePreview, Button } from 'prizmux'
+import { useState } from 'react'
+
+export default function App() {
+  const [visible, setVisible] = useState(false)
+  
+  const images = [
+    'https://example.com/photo1.jpg',
+    'https://example.com/photo2.jpg',
+    'https://example.com/photo3.jpg',
+  ]
+
+  return (
+    <>
+      <Button 
+        title="View Gallery" 
+        onPress={() => setVisible(true)}
+      />
+      
+      <ImagePreview
+        visible={visible}
+        images={images}
+        onClose={() => setVisible(false)}
+      />
+    </>
+  )
+}
+```
+
+## With Initial Index
+
+```tsx
+import { ImagePreview } from 'prizmux'
+
+<ImagePreview
+  visible={visible}
+  images={images}
+  initialIndex={2}
+  onClose={() => setVisible(false)}
+/>
+```
+
+## Controlled Gallery
+
+```tsx
+import { ImagePreview, Button } from 'prizmux'
+import { View, Text } from 'react-native'
+import { useState } from 'react'
+
+export default function ControlledGallery() {
+  const [visible, setVisible] = useState(false)
+  const [currentIndex, setCurrentIndex] = useState(0)
+  
+  const images = [
+    'https://example.com/photo1.jpg',
+    'https://example.com/photo2.jpg',
+    'https://example.com/photo3.jpg',
+  ]
+
+  return (
+    <>
+      <Button 
+        title="View Gallery" 
+        onPress={() => setVisible(true)}
+      />
+      
+      <ImagePreview
+        visible={visible}
+        images={images}
+        initialIndex={currentIndex}
+        title={`${currentIndex + 1} of ${images.length}`}
+        onClose={() => setVisible(false)}
+      />
+    </>
+  )
+}
+```
+
+## Product Image Gallery
+
+```tsx
+import { ImagePreview, Button } from 'prizmux'
+import { View, Image, ScrollView, Pressable } from 'react-native'
+import { useState } from 'react'
+
+export default function ProductGallery({ productImages }) {
+  const [visible, setVisible] = useState(false)
+  const [selectedIndex, setSelectedIndex] = useState(0)
+
+  return (
+    <View style={{ gap: 12 }}>
+      {/* Main image */}
+      <Pressable onPress={() => setVisible(true)}>
+        <Image
+          source={{ uri: productImages[selectedIndex] }}
+          style={{ width: '100%', height: 300, borderRadius: 12 }}
+        />
+      </Pressable>
+      
+      {/* Thumbnails */}
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        {productImages.map((image, idx) => (
+          <Pressable
+            key={idx}
+            onPress={() => {
+              setSelectedIndex(idx)
+              setVisible(true)
+            }}
+            style={{
+              marginRight: 8,
+              opacity: selectedIndex === idx ? 1 : 0.6,
+            }}
+          >
+            <Image
+              source={{ uri: image }}
+              style={{ width: 80, height: 80, borderRadius: 8 }}
+            />
+          </Pressable>
+        ))}
+      </ScrollView>
+      
+      {/* Gallery viewer */}
+      <ImagePreview
+        visible={visible}
+        images={productImages}
+        initialIndex={selectedIndex}
+        onClose={() => setVisible(false)}
+      />
+    </View>
+  )
+}
+```
+
+## Custom Icons
+
+```tsx
+import { ImagePreview } from 'prizmux'
+import { Text } from 'react-native'
+
+<ImagePreview
+  visible={visible}
+  images={images}
+  onClose={() => setVisible(false)}
+  closeIcon={<Text style={{ fontSize: 24 }}>✕</Text>}
+  prevIcon={<Text style={{ fontSize: 24 }}>‹</Text>}
+  nextIcon={<Text style={{ fontSize: 24 }}>›</Text>}
+/>
+```
+
+## Props Reference
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `images` | `ImageSource[]` | - | Array of images to display |
+| `visible` | `boolean` | `false` | Control gallery visibility |
+| `images` | `string \| string[]` | **Required** | Image URLs to display |
 | `initialIndex` | `number` | `0` | Starting image index |
-| `onIndexChange` | `(index: number) => void` | - | Called when swiping |
-| `allowZoom` | `boolean` | `true` | Enable pinch-to-zoom |
-| `onClose` | `() => void` | - | Called when closing |
-| `showIndicator` | `boolean` | `true` | Show page indicator |
+| `onClose` | `() => void` | **Required** | Called when gallery closes |
+| `title` | `string` | - | Optional header title |
+| `closeIcon` | `ReactNode` | - | Custom close button icon |
+| `prevIcon` | `ReactNode` | - | Custom previous button icon |
+| `nextIcon` | `ReactNode` | - | Custom next button icon |
+
+## Features
+
+- ✨ Pinch-to-zoom support
+- 🎯 Swipe gestures for navigation
+- 🎨 Smooth animations
+- 📱 Responsive design
+- 🎭 Customizable icons
+- ♿ Accessibility support
 
 ## Usage
 

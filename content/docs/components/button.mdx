@@ -1,38 +1,22 @@
 ---
 title: Button
-description: A versatile button component for all your interactive needs
+description: A versatile, accessible button component
 ---
 
-# Button
 
-The Button component is the foundation of user interactions in your app. It supports multiple variants, sizes, and states out of the box.
+A flexible button component designed for all user interactions. It supports multiple variants, sizes, loading states, and comes with full accessibility support out of the box.
 
 ## Overview
 
-Button is a flexible component that handles touch interactions, loading states, and disabled states. It's fully typed and accessible by default.
+The Button component is the foundation of interactive elements in your app. It handles touch feedback, accessibility, and visual feedback automatically.
 
 **Use it for:**
-- Primary actions in your UI
-- Form submissions
+- Primary and secondary actions
+- Form submissions  
 - Navigation triggers
-- Any interactive element requiring user action
+- Any interactive element requiring user feedback
 
-## Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `title` | `string` | - | The button label text |
-| `onPress` | `() => void` | - | Callback when button is pressed |
-| `variant` | `'primary' \| 'secondary' \| 'outline'` | `'primary'` | Visual style variant |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Button size |
-| `disabled` | `boolean` | `false` | Disable user interactions |
-| `loading` | `boolean` | `false` | Show loading state |
-| `icon` | `React.ReactNode` | - | Icon to display |
-| `iconPosition` | `'left' \| 'right'` | `'left'` | Icon placement |
-
-## Usage
-
-### Basic Button
+## Basic Usage
 
 ```tsx
 import { Button } from 'prizmux'
@@ -41,13 +25,204 @@ export default function App() {
   return (
     <Button 
       title="Press Me" 
-      onPress={() => alert('Button pressed!')}
+      onPress={() => console.log('Pressed!')}
     />
   )
 }
 ```
 
-### Variants
+## Variants
+
+The Button component supports two visual variants:
+
+### Filled (Default)
+
+```tsx
+<Button 
+  title="Filled Button" 
+  variant="filled"
+  onPress={() => {}}
+/>
+```
+
+### Outline
+
+```tsx
+<Button 
+  title="Outline Button" 
+  variant="outline"
+  onPress={() => {}}
+/>
+```
+
+## Sizes
+
+Choose the right size for your layout:
+
+### Small
+```tsx
+<Button 
+  title="Small" 
+  size="small"
+  onPress={() => {}}
+/>
+```
+
+### Medium (Default)
+```tsx
+<Button 
+  title="Medium" 
+  size="medium"
+  onPress={() => {}}
+/>
+```
+
+### Large
+```tsx
+<Button 
+  title="Large" 
+  size="large"
+  onPress={() => {}}
+/>
+```
+
+## With Icons
+
+Add icons to buttons for better visual communication:
+
+```tsx
+import { Button } from 'prizmux'
+import { Settings } from 'lucide-react-native'
+
+export default function App() {
+  return (
+    <>
+      {/* Icon on the left */}
+      <Button 
+        title="Settings"
+        icon={<Settings size={20} />}
+        iconPosition="left"
+        onPress={() => {}}
+      />
+      
+      {/* Icon on the right */}
+      <Button 
+        title="Next"
+        icon={<ChevronRight size={20} />}
+        iconPosition="right"
+        onPress={() => {}}
+      />
+      
+      {/* Icon only */}
+      <Button 
+        icon={<Menu size={24} />}
+        onPress={() => {}}
+      />
+    </>
+  )
+}
+```
+
+## Loading State
+
+Show loading feedback during async operations:
+
+```tsx
+import { Button } from 'prizmux'
+import { useState } from 'react'
+
+export default function App() {
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleSubmit = async () => {
+    setIsLoading(true)
+    try {
+      await submitForm()
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  return (
+    <Button 
+      title="Submit"
+      isLoading={isLoading}
+      onPress={handleSubmit}
+    />
+  )
+}
+```
+
+## Disabled State
+
+Disable buttons when they shouldn't be interactive:
+
+```tsx
+<Button 
+  title="Disabled" 
+  disabled={true}
+  onPress={() => {}}
+/>
+```
+
+## Full Width
+
+Make buttons stretch to fill their container:
+
+```tsx
+<Button 
+  title="Full Width Button"
+  fullWidth={true}
+  onPress={() => {}}
+/>
+```
+
+## Custom Styling
+
+Customize the button appearance with style props:
+
+```tsx
+<Button 
+  title="Custom"
+  borderRadius={20}
+  style={{ backgroundColor: '#FF6B6B' }}
+  textStyle={{ fontSize: 18, fontWeight: '700' }}
+  onPress={() => {}}
+/>
+```
+
+## Accessibility
+
+The Button component is fully accessible:
+
+```tsx
+<Button 
+  title="Like"
+  accessibilityLabel="Like this post"
+  onPress={() => {}}
+/>
+```
+
+## Props Reference
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `title` | `string` | - | Button label text (optional for icon-only buttons) |
+| `onPress` | `() => void` | **Required** | Callback when button is pressed |
+| `variant` | `'filled' \| 'outline'` | `'filled'` | Visual variant |
+| `size` | `'small' \| 'medium' \| 'large'` | `'medium'` | Button size |
+| `disabled` | `boolean` | `false` | Disables interactions and shows disabled state |
+| `isLoading` | `boolean` | `false` | Shows loading indicator |
+| `icon` | `ReactNode` | - | Icon to display |
+| `iconPosition` | `'left' \| 'right'` | `'left'` | Position of icon relative to title |
+| `fullWidth` | `boolean` | `false` | Stretch button to full width |
+| `borderRadius` | `number` | `0` | Border radius in pixels |
+| `hitSlop` | `number` | - | Increase tap target area (mobile accessibility) |
+| `accessibilityLabel` | `string` | - | Screen reader label |
+| `style` | `ViewStyle` | - | Custom button container styles |
+| `contentStyle` | `ViewStyle` | - | Custom inner content wrapper styles |
+| `textStyle` | `TextStyle` | - | Custom button text styles |
+| `onLongPress` | `() => void` | - | Callback for long press gestures |
 
 ```tsx
 <Button title="Primary" variant="primary" />

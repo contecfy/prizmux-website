@@ -1,33 +1,123 @@
 ---
-title: Empty State
-description: A component for displaying empty data states
+title: EmptyState
+description: A helpful component for displaying empty data states
 ---
 
-# Empty State
 
-EmptyState is a component that displays helpful messaging when there's no data to show. Perfect for guiding users when content is unavailable.
+A simple yet powerful component for displaying helpful messaging when there's no data to show. It combines an icon, title, description, and optional action to guide users through empty states gracefully.
 
 ## Overview
 
-EmptyState combines an icon, title, description, and optional action to create a complete empty state experience. It helps users understand why nothing is displayed and what to do next.
+EmptyState creates a consistent, informative experience when content is unavailable. It helps users understand why nothing is displayed and what they can do next.
 
 **Use it for:**
 - No search results
 - Empty lists or feeds
 - First-time user experiences
-- Data not available states
-- Error fallbacks
+- Unavailable data states
+- Error states and fallbacks
 
-## Props
+## Basic Usage
+
+```tsx
+import { EmptyState } from 'prizmux'
+import { Text, View } from 'react-native'
+
+export default function NoResults() {
+  return (
+    <EmptyState
+      title="No Results"
+      description="Try adjusting your search terms"
+      icon={<Text style={{ fontSize: 48 }}>🔍</Text>}
+    />
+  )
+}
+```
+
+## With Action Button
+
+```tsx
+import { EmptyState, Button } from 'prizmux'
+import { Text } from 'react-native'
+
+function EmptyList() {
+  return (
+    <EmptyState
+      title="No Items Yet"
+      description="Create your first item to get started"
+      icon={<Text style={{ fontSize: 48 }}>📝</Text>}
+      action={
+        <Button 
+          title="Create Item"
+          fullWidth={true}
+          onPress={() => navigation.navigate('Create')}
+        />
+      }
+    />
+  )
+}
+```
+
+## Search Results Example
+
+```tsx
+import { EmptyState } from 'prizmux'
+import { Text } from 'react-native'
+import { useState } from 'react'
+
+function SearchScreen() {
+  const [query, setQuery] = useState('')
+  const [results, setResults] = useState([])
+
+  return (
+    <>
+      <SearchBar value={query} onChange={setQuery} />
+      {results.length === 0 ? (
+        <EmptyState
+          title="No Results Found"
+          description={`We couldn't find anything for "${query}"`}
+          icon={<Text style={{ fontSize: 48 }}>🔍</Text>}
+        />
+      ) : (
+        <ResultsList data={results} />
+      )}
+    </>
+  )
+}
+```
+
+## Empty Feed
+
+```tsx
+import { EmptyState, Button } from 'prizmux'
+import { Text } from 'react-native'
+
+function EmptyFeed() {
+  return (
+    <EmptyState
+      title="Nothing to See Here"
+      description="Follow some users to see posts in your feed"
+      icon={<Text style={{ fontSize: 48 }}>📭</Text>}
+      action={
+        <Button 
+          title="Discover Users"
+          fullWidth={true}
+          onPress={() => navigation.navigate('Discover')}
+        />
+      }
+    />
+  )
+}
+```
+
+## Props Reference
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `icon` | `React.ReactNode` | - | Icon to display |
-| `title` | `string` | - | Main message |
-| `description` | `string` | - | Secondary message |
-| `action` | `React.ReactNode` | - | Action button |
-| `onAction` | `() => void` | - | Action callback |
-| `variant` | `'default' \| 'compact'` | `'default'` | Layout variant |
+| `title` | `string` | **Required** | Main headline |
+| `description` | `string` | **Required** | Supporting text |
+| `icon` | `ReactNode` | - | Icon or illustration |
+| `action` | `ReactNode` | - | Action component (usually Button) |
 
 ## Usage
 

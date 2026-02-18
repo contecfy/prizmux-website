@@ -1,33 +1,143 @@
 ---
-title: Bottom Sheet
-description: A smooth modal that slides up from the bottom
+title: BottomSheet
+description: A smooth, customizable modal that slides up from the bottom
 ---
 
-# Bottom Sheet
-
-BottomSheet is a modal component that slides up from the bottom of the screen. Perfect for menus, filters, and secondary actions.
+A beautiful modal component that slides up from the bottom of the screen with smooth animations and intuitive gestures. Perfect for displaying additional options, menus, filters, and forms without taking up the full screen.
 
 ## Overview
 
-BottomSheet provides a smooth animation and handles touch gestures automatically. It's perfect for displaying additional options without taking up the full screen.
+BottomSheet handles animations, touch gestures, and swipe-to-close interactions automatically. It provides a native feel with customizable content and styling.
 
 **Use it for:**
-- Action menus
-- Filters and sorting
-- Additional options
-- Secondary forms
+- Action menus and options
+- Filter and sorting panels
+- Secondary forms and input
 - Share sheets
+- Detailed information panels
+- Bottom navigation menus
 
-## Props
+## Basic Usage
+
+```tsx
+import { BottomSheet, Button } from 'prizmux'
+import { useState } from 'react'
+import { Text, View } from 'react-native'
+
+export default function App() {
+  const [visible, setVisible] = useState(false)
+
+  return (
+    <>
+      <Button 
+        title="Open Sheet" 
+        onPress={() => setVisible(true)}
+      />
+      
+      <BottomSheet
+        visible={visible}
+        onClose={() => setVisible(false)}
+        title="Options"
+      >
+        <Text>Sheet content goes here</Text>
+      </BottomSheet>
+    </>
+  )
+}
+```
+
+## With Custom Content
+
+```tsx
+import { BottomSheet, Button } from 'prizmux'
+import { View, Text } from 'react-native'
+import { useState } from 'react'
+
+function ActionSheet() {
+  const [visible, setVisible] = useState(false)
+
+  const actions = [
+    { label: 'Edit', icon: '✏️', onPress: () => {} },
+    { label: 'Share', icon: '📤', onPress: () => {} },
+    { label: 'Delete', icon: '🗑️', onPress: () => {} },
+  ]
+
+  return (
+    <>
+      <Button 
+        title="Menu" 
+        onPress={() => setVisible(true)}
+      />
+      
+      <BottomSheet
+        visible={visible}
+        onClose={() => setVisible(false)}
+        title="Actions"
+        showDragHandle={true}
+        swipeToClose={true}
+      >
+        <View style={{ paddingHorizontal: 16, paddingBottom: 20 }}>
+          {actions.map((action, idx) => (
+            <Button
+              key={idx}
+              title={action.label}
+              icon={<Text>{action.icon}</Text>}
+              iconPosition="left"
+              fullWidth={true}
+              variant="outline"
+              style={{ marginBottom: 12 }}
+              onPress={() => {
+                action.onPress()
+                setVisible(false)
+              }}
+            />
+          ))}
+        </View>
+      </BottomSheet>
+    </>
+  )
+}
+```
+
+## With Dismiss on Outside Tap
+
+```tsx
+<BottomSheet
+  visible={visible}
+  onClose={() => setVisible(false)}
+  dismissOnTouchOutside={true}
+  showCloseButton={true}
+>
+  <Text>Tap outside to close</Text>
+</BottomSheet>
+```
+
+## Without Drag Handle
+
+```tsx
+<BottomSheet
+  visible={visible}
+  onClose={() => setVisible(false)}
+  showDragHandle={false}
+  showCloseButton={true}
+>
+  <Text>Close using the button</Text>
+</BottomSheet>
+```
+
+## Props Reference
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `isVisible` | `boolean` | `false` | Control visibility |
-| `onClose` | `() => void` | - | Called when sheet is dismissed |
-| `snapPoints` | `number[]` | - | Heights where sheet snaps |
-| `children` | `React.ReactNode` | - | Sheet content |
-| `animationType` | `'slide' \| 'fade'` | `'slide'` | Animation style |
-| `handleIndicator` | `boolean` | `true` | Show drag handle |
+| `visible` | `boolean` | `false` | Control sheet visibility |
+| `onClose` | `() => void` | **Required** | Called when sheet is dismissed |
+| `title` | `string` | - | Optional header title |
+| `children` | `ReactNode` | **Required** | Sheet content |
+| `dismissOnTouchOutside` | `boolean` | `true` | Close when tapping backdrop |
+| `showCloseButton` | `boolean` | `true` | Display close button |
+| `showDragHandle` | `boolean` | `true` | Show drag handle indicator |
+| `swipeToClose` | `boolean` | `true` | Enable swipe-to-close gesture |
+| `closeIcon` | `ReactNode` | - | Custom close button icon |
 
 ## Usage
 

@@ -1,34 +1,151 @@
 ---
-title: Header with Back
-description: A navigation header with back button and customization
+title: HeaderWithBack
+description: A flexible navigation header with back button and action support
 ---
 
-# Header with Back
 
-HeaderWithBack is a navigation component that provides a header with a back button, title, and action buttons. Perfect for screen transitions and navigation flows.
+A navigation header component with back button, title, optional avatar, and customizable action buttons. Perfect for detail screens and navigation flows.
 
 ## Overview
 
-HeaderWithBack handles standard navigation patterns while remaining flexible for custom needs. It automatically manages safe area insets and provides haptic feedback.
+HeaderWithBack simplifies common header patterns while remaining flexible for custom needs. It handles layout, spacing, and interactions automatically.
 
 **Use it for:**
-- Screen headers
-- Navigation flows
+- Screen headers and navigation
 - Detail screens
+- Profile screens
 - Modal headers
 - Settings screens
+- Chat screens
 
-## Props
+## Basic Usage
+
+```tsx
+import { HeaderWithBack } from 'prizmux'
+import { View, Text } from 'react-native'
+
+export default function DetailsScreen({ navigation }) {
+  return (
+    <>
+      <HeaderWithBack
+        title="Product Details"
+        onBackPress={() => navigation.goBack()}
+      />
+      <View style={{ flex: 1, padding: 16 }}>
+        {/* Screen content */}
+      </View>
+    </>
+  )
+}
+```
+
+## With Avatar
+
+```tsx
+import { HeaderWithBack } from 'prizmux'
+import { Image } from 'react-native'
+
+function ChatScreen({ navigation, contact }) {
+  return (
+    <HeaderWithBack
+      title={contact.name}
+      avatar={
+        <Image
+          source={{ uri: contact.avatar }}
+          style={{ width: 40, height: 40, borderRadius: 20 }}
+        />
+      }
+      onBackPress={() => navigation.goBack()}
+    />
+  )
+}
+```
+
+## With Action Buttons
+
+```tsx
+import { HeaderWithBack } from 'prizmux'
+import { Text } from 'react-native'
+
+function ArticleScreen({ navigation }) {
+  return (
+    <HeaderWithBack
+      title="Article"
+      onBackPress={() => navigation.goBack()}
+      actions={[
+        {
+          icon: <Text style={{ fontSize: 20 }}>📤</Text>,
+          onPress: () => shareArticle(),
+          badge: undefined
+        },
+        {
+          icon: <Text style={{ fontSize: 20 }}>⋮</Text>,
+          onPress: () => showMenu(),
+        }
+      ]}
+    />
+  )
+}
+```
+
+## With Badge Notifications
+
+```tsx
+import { HeaderWithBack } from 'prizmux'
+import { Text } from 'react-native'
+
+function MessagesScreen({ navigation, unreadCount }) {
+  return (
+    <HeaderWithBack
+      title="Messages"
+      onBackPress={() => navigation.goBack()}
+      actions={[
+        {
+          icon: <Text style={{ fontSize: 20 }}>🔔</Text>,
+          onPress: () => openNotifications(),
+          badge: unreadCount > 0 ? unreadCount : undefined
+        }
+      ]}
+    />
+  )
+}
+```
+
+## Title Positioning
+
+```tsx
+{/* Left-aligned title */}
+<HeaderWithBack
+  title="Edit Profile"
+  titlePosition="left"
+  onBackPress={() => navigation.goBack()}
+/>
+
+{/* Center-aligned title (default) */}
+<HeaderWithBack
+  title="Details"
+  titlePosition="center"
+  onBackPress={() => navigation.goBack()}
+/>
+
+{/* Right-aligned title */}
+<HeaderWithBack
+  title="Info"
+  titlePosition="right"
+  onBackPress={() => navigation.goBack()}
+/>
+```
+
+## Props Reference
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `title` | `string` | - | Header title |
-| `onBack` | `() => void` | - | Called when back button pressed |
-| `subtitle` | `string` | - | Optional subtitle |
-| `rightAction` | `React.ReactNode` | - | Right-side button/icon |
-| `onRightAction` | `() => void` | - | Right action callback |
-| `backIcon` | `React.ReactNode` | - | Custom back icon |
-| `safeArea` | `boolean` | `true` | Respect safe area |
+| `title` | `string` | **Required** | Header title text |
+| `onBackPress` | `() => void` | **Required** | Back button callback |
+| `avatar` | `ReactNode` | - | Avatar component (renders as-is) |
+| `titlePosition` | `'left' \| 'center' \| 'right'` | `'center'` | Title alignment |
+| `backIcon` | `ReactNode` | - | Custom back icon (defaults to ‹) |
+| `actions` | `HeaderAction[]` | - | Action buttons array |
 
 ## Usage
 

@@ -1,34 +1,217 @@
 ---
-title: Phone Input
+title: PhoneInput
 description: A formatted phone number input with international support
 ---
 
-# Phone Input
 
-PhoneInput is a specialized text input component that automatically formats phone numbers and provides country selection. It handles validation and different phone formats.
+A specialized phone number input component with automatic formatting, country selection, and international support. Perfect for collecting phone numbers in forms.
 
 ## Overview
 
-PhoneInput combines phone number formatting with validation. It supports multiple countries, automatically detects format, and provides a clean user experience for phone entry.
+PhoneInput handles phone number formatting automatically and provides a country picker for international support. It manages validation, formatting, and provides a clean UX for phone entry.
 
 **Use it for:**
-- User registration forms
+- User registration and signup forms
 - Contact information collection
-- Call/SMS features
-- Appointment booking
+- Call or SMS features
+- Appointment booking forms
 - Two-factor authentication
+- Profile updates
 
-## Props
+## Basic Usage
+
+```tsx
+import { PhoneInput } from 'prizmux'
+import { useState } from 'react'
+import { View } from 'react-native'
+
+export default function SignUpForm() {
+  const [phoneData, setPhoneData] = useState(null)
+
+  return (
+    <View style={{ padding: 16 }}>
+      <PhoneInput
+        onChange={(value) => setPhoneData(value)}
+        placeholder="712 345 678"
+      />
+    </View>
+  )
+}
+```
+
+## With Default Country
+
+```tsx
+import { PhoneInput } from 'prizmux'
+
+<PhoneInput
+  defaultCountryCode="GB"
+  onChange={(value) => console.log(value)}
+  placeholder="7700 900000"
+/>
+```
+
+## Restricted Countries
+
+```tsx
+import { PhoneInput } from 'prizmux'
+
+<PhoneInput
+  defaultCountryCode="UG"
+  allowedCountries={['UG', 'KE', 'TZ', 'RW']}
+  onChange={(value) => console.log(value)}
+/>
+```
+
+## With Label and Error
+
+```tsx
+import { PhoneInput } from 'prizmux'
+import { useState } from 'react'
+import { View, Text } from 'react-native'
+
+export default function ContactForm() {
+  const [phoneData, setPhoneData] = useState(null)
+  const [error, setError] = useState('')
+
+  const handlePhoneChange = (value) => {
+    setPhoneData(value)
+    // Validate
+    if (value.full && value.full.length < 10) {
+      setError('Phone number too short')
+    } else {
+      setError('')
+    }
+  }
+
+  return (
+    <View style={{ gap: 12 }}>
+      <Text style={{ fontSize: 16, fontWeight: '600' }}>Phone Number</Text>
+      <PhoneInput
+        value={phoneData}
+        onChange={handlePhoneChange}
+        label="Mobile Phone"
+        error={error}
+        placeholder="Enter phone number"
+      />
+      {error && <Text style={{ color: '#EF4444' }}>{error}</Text>}
+    </View>
+  )
+}
+```
+
+## Form Integration
+
+```tsx
+import { PhoneInput, Button } from 'prizmux'
+import { useState } from 'react'
+import { View, Text } from 'react-native'
+
+export default function RegistrationForm() {
+  const [phoneData, setPhoneData] = useState(null)
+  const [loading, setLoading] = useState(false)
+
+  const handleSubmit = async () => {
+    if (!phoneData?.full) {
+      alert('Please enter a phone number')
+      return
+    }
+
+    setLoading(true)
+    try {
+      await submitPhoneNumber(phoneData.full)
+      alert('Phone number submitted!')
+    } catch (error) {
+      alert('Error: ' + error.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <View style={{ gap: 16, padding: 16 }}>
+      <PhoneInput
+        value={phoneData}
+        onChange={setPhoneData}
+        placeholder="Enter your phone number"
+      />
+      
+      <Button
+        title="Verify Phone"
+        isLoading={loading}
+        fullWidth={true}
+        onPress={handleSubmit}
+      />
+    </View>
+  )
+}
+```
+
+## Accessing Phone Data
+
+The `onChange` callback receives a `PhoneInputValue` object with three properties:
+
+```tsx
+interface PhoneInputValue {
+  country: Country          // Country object with code and dial info
+  number: string           // Local number without dial code
+  full: string            // Full number with dial code (e.g. "+254712345678")
+}
+
+// Usage
+<PhoneInput
+  onChange={(value) => {
+    console.log(value.country.code)    // 'UG'
+    console.log(value.number)          // '712345678'
+    console.log(value.full)            // '+256712345678'
+  }}
+/>
+```
+
+## Custom Flag Rendering
+
+```tsx
+import { PhoneInput } from 'prizmux'
+
+<PhoneInput
+  onChange={(value) => {}}
+  renderFlag={(country) => (
+    <Text style={{ fontSize: 24, marginRight: 8 }}>
+      {country.code === 'US' ? '🇺🇸' : '🌍'}
+    </Text>
+  )}
+/>
+```
+
+## Props Reference
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `value` | `string` | - | Current phone number |
-| `onChange` | `(value: string) => void` | - | Called when value changes |
-| `onCountryChange` | `(code: string) => void` | - | Called when country changes |
-| `defaultCountry` | `string` | `'US'` | Initial country code |
-| `disabled` | `boolean` | `false` | Disable input |
+| `value` | `PhoneInputValue` | - | Current phone data |
+| `onChange` | `(value: PhoneInputValue) => void` | **Required** | Called when value changes |
+| `defaultCountryCode` | `string` | `'US'` | Initial country code |
+| `allowedCountries` | `string[]` | - | Restrict to specific countries |
+| `placeholder` | `string` | `'712 345 678'` | Input placeholder |
+| `label` | `string` | - | Input label |
 | `error` | `string` | - | Error message |
-| `placeholder` | `string` | - | Placeholder text |
+| `disabled` | `boolean` | `false` | Disable input |
+| `pickerTitle` | `string` | `'Select Country'` | Country picker title |
+| `searchPlaceholder` | `string` | - | Country search placeholder |
+| `dropdownIcon` | `ReactNode` | - | Custom dropdown icon |
+| `renderFlag` | `(country) => ReactNode` | - | Custom flag rendering |
+| `containerStyle` | `ViewStyle` | - | Container styles |
+| `inputStyle` | `TextStyle` | - | Input field styles |
+| `labelStyle` | `TextStyle` | - | Label text styles |
+| `errorStyle` | `TextStyle` | - | Error text styles |
+
+## Features
+
+- 🌍 International country support
+- 🎯 Automatic formatting and detection
+- 🔍 Country search and filtering
+- 🎨 Customizable styles and icons
+- ✅ Full TypeScript support
+- ♿ Accessibility support
 
 ## Usage
 
