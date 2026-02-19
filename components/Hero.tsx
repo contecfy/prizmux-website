@@ -41,9 +41,13 @@ export default function App() {
               Developer-first React Native UI
             </span>
 
-            <h1 className="mt-3 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-snug">
-              Build modern React Native apps with ease
-            </h1>
+          <h1 className="mt-3 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-snug">
+  Build modern{" "} React Native {" "}
+  <span className="text-[#00ff00]">
+    UI components
+  </span>{" "}
+ with ease
+</h1>
 
             <p className="mt-4 sm:mt-6 text-sm sm:text-base text-zinc-600 dark:text-zinc-300 max-w-lg">
               Prizmux is a fully typed, production-ready component system for React Native. Zero dependencies, customizable, and ready for production.
