@@ -52,7 +52,7 @@ export default function App() {
             <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row flex-wrap gap-3">
               <Link
                 href="/docs"
-                className="inline-flex justify-center bg-black dark:bg-white text-white dark:text-black px-5 sm:px-7 py-2.5 sm:py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity text-sm sm:text-base"
+                className="inline-flex justify-center bg-black dark:bg-white text-white dark:text-black px-5 sm:px-7 py-2.5 sm:py-3 font-semibold hover:opacity-90 transition-opacity text-sm sm:text-base"
               >
                 Get Started
               </Link>
@@ -60,7 +60,7 @@ export default function App() {
                 href="https://github.com/your-username/prizmux"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex justify-center border border-black dark:border-white text-black dark:text-white px-5 sm:px-7 py-2.5 sm:py-3 rounded-lg font-semibold hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black transition-colors text-sm sm:text-base"
+                className="inline-flex justify-center border border-black dark:border-white text-black dark:text-white px-5 sm:px-7 py-2.5 sm:py-3 font-semibold hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black transition-colors text-sm sm:text-base"
               >
                 GitHub
               </a>
