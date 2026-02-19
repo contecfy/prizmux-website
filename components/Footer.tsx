@@ -7,7 +7,7 @@ export function Footer() {
         
         {/* Big Word */}
         <div className="space-y-4 sm:space-y-6">
-          <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight">
+          <h2 className="text-green-500 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight">
             Prizmux
           </h2>
 
