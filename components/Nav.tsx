@@ -21,7 +21,16 @@ export function Navbar() {
   ]
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white dark:bg-black text-black dark:text-white border-b border-zinc-200 dark:border-zinc-800">
+    <header className="
+  sticky top-0 z-50 w-full
+  backdrop-blur-xl
+  bg-white/60 dark:bg-black/50
+  supports-[backdrop-filter]:bg-white/60
+  supports-[backdrop-filter]:dark:bg-black/50
+  border-b border-white/20 dark:border-white/10
+  shadow-sm
+  text-black dark:text-white
+">
       <div className={`flex h-16 items-center justify-between px-4 sm:px-6 ${pathname.startsWith('/docs') ? 'mx-auto w-full' : 'mx-auto max-w-7xl'}`}>
 
         {/* Left — Logo */}

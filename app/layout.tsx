@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     siteName: "Prizmux",
     images: [
       {
-        url: "https://prizmux.dev/og-image.png",
+        url: "/logo.png",
         width: 1200,
         height: 630,
         alt: "Prizmux - React Native Component Library",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     title: "Prizmux - React Native Component Library",
     description: "Build beautiful, performant React Native apps with production-ready components.",
     creator: "@prizmux",
-    images: ["https://prizmux.dev/og-image.png"],
+    images: ["/logo.png"],
   },
   robots: {
     index: true,

@@ -6,13 +6,10 @@ interface ComponentCard {
 }
 
 const components: ComponentCard[] = [
-  { name: "Button", description: "Pressable with variants and icons" },
-  { name: "Card", description: "Content container with shadows" },
-  { name: "BottomSheet", description: "Slide-up panel" },
   { name: "ImagePreview", description: "Quick image display" },
-  { name: "HeaderWithBack", description: "Header with back navigation" },
-  { name: "EmptyState", description: "Placeholder for empty views" },
+  { name: "Toast", description: "Notification with dismiss option" },
   { name: "PhoneInput", description: "Phone number input with formatting" },
+  { name: "BottomSheet", description: "Slide-up panel for additional content" },
 ]
 
 export function ComponentPreview() {
