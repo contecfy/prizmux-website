@@ -18,17 +18,17 @@ const navigation = [
   {
     title: "Components",
     items: [
-      { title: "Alert", href: "/docs/components/alert", icon: Package },
-      { title: "BottomSheet", href: "/docs/components/bottom-sheet", icon: Package },
-      { title: "Button", href: "/docs/components/button", icon: Layout },
-      { title: "Card", href: "/docs/components/card", icon: Package },
-      { title: "EmptyState", href: "/docs/components/empty-state", icon: Package },
-      { title: "FAB", href: "/docs/components/fab", icon: Zap },
-      { title: "Header", href: "/docs/components/header", icon: Package },
-      { title: "ImagePreview", href: "/docs/components/image-preview", icon: Package },
-      { title: "PhoneInput", href: "/docs/components/phone-input", icon: Package },
-      { title: "Sidebar", href: "/docs/components/sidebar", icon: Package },
-      { title: "Toast", href: "/docs/components/toast", icon: Package },
+      { title: "Alert", href: "/docs/components/alert", icon: undefined },
+      { title: "BottomSheet", href: "/docs/components/bottom-sheet", icon: undefined },
+      { title: "Button", href: "/docs/components/button", icon: undefined },
+      { title: "Card", href: "/docs/components/card", icon: undefined },
+      { title: "EmptyState", href: "/docs/components/empty-state", icon: undefined },
+      { title: "FAB", href: "/docs/components/fab", icon: undefined },
+      { title: "Header", href: "/docs/components/header", icon: undefined },
+      { title: "ImagePreview", href: "/docs/components/image-preview", icon: undefined },
+      { title: "PhoneInput", href: "/docs/components/phone-input", icon: undefined },
+      { title: "Sidebar", href: "/docs/components/sidebar", icon: undefined },
+      { title: "Toast", href: "/docs/components/toast", icon: undefined },
     ],
   },
 ]
@@ -65,7 +65,7 @@ export function Sidebar() {
                     {isActive && (
                       <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#00ff00] rounded-r-full" />
                     )}
-                    <Icon className="w-4 h-4 flex-shrink-0" />
+                    {Icon && <Icon className="w-4 h-4 flex-shrink-0" />}
                     <span className="flex-1">{item.title}</span>
                   </Link>
                 </li>
