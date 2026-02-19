@@ -2,6 +2,7 @@ import { notFound } from "next/navigation"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import { CodeBlock } from "@/components/code-block"
 import { getDocBySlug } from "@/lib/mdx"
+import remarkGfm from "remark-gfm"
 
 interface PageProps {
   params: Promise<{ slug: string[] }>
@@ -46,7 +47,9 @@ const mdxComponents = {
     <a className="hover:underline" {...props} style={{ color: '#00ff00' }} />
   ),
   table: (props: any) => (
-    <table className="w-full border-collapse my-6 text-sm" {...props} />
+    <div className="my-6 overflow-x-auto border border-zinc-200 dark:border-zinc-700 rounded-lg">
+      <table className="w-full border-collapse text-sm" {...props} />
+    </div>
   ),
   thead: (props: any) => (
     <thead className="bg-zinc-100 dark:bg-zinc-900" {...props} />
@@ -79,7 +82,15 @@ export default async function DocPage({ params }: PageProps) {
       <h1 className="text-5xl font-bold tracking-tight text-black dark:text-white mb-2">{title}</h1>
       {description && <p className="text-lg text-zinc-600 dark:text-zinc-400 mb-8">{description}</p>}
       <div className="prose-content">
-        <MDXRemote source={content} components={mdxComponents} />
+        <MDXRemote 
+          source={content} 
+          components={mdxComponents}
+          options={{
+            mdxOptions: {
+              remarkPlugins: [remarkGfm],
+            },
+          }}
+        />
       </div>
     </article>
   )
