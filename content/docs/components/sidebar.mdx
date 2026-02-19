@@ -1,0 +1,162 @@
+---
+title: Sidebar
+description: Side navigation drawer component
+---
+
+Sidebar component for side navigation and menu systems. Supports left/right/top/bottom positioning with custom menu items, badges, and styling.
+
+## Basic Usage
+
+```tsx
+import { Sidebar } from 'prizmux'
+import { Home, Settings, LogOut } from 'lucide-react-native'
+import { useState } from 'react'
+
+export default function App() {
+  const [visible, setVisible] = useState(false)
+
+  const items = [
+    {
+      id: '1',
+      title: 'Home',
+      icon: <Home size={20} />,
+      onPress: () => navigation.navigate('Home'),
+    },
+    {
+      id: '2',
+      title: 'Settings',
+      icon: <Settings size={20} />,
+      onPress: () => navigation.navigate('Settings'),
+    },
+  ]
+
+  return (
+    <Sidebar
+      visible={visible}
+      onClose={() => setVisible(false)}
+      items={items}
+      side="left"
+    />
+  )
+}
+```
+
+## Props
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| `visible` | `boolean` | — | ✓ | Sidebar visibility |
+| `onClose` | `() => void` | — | ✓ | Close callback |
+| `items` | `SidebarMenuItem[]` | — | ✓ | Menu items |
+| `side` | `'left' \| 'right' \| 'top' \| 'bottom'` | `'right'` | — | Slide direction |
+| `width` | `number` | — | — | Width for left/right (% of screen) |
+| `height` | `number` | — | — | Height for top/bottom (% of screen) |
+| `offsetTop` | `number` | `0` | — | Distance from top (left/right only) |
+| `offsetSide` | `number` | `0` | — | Gap from edge |
+| `showOverlay` | `boolean` | `true` | — | Show backdrop overlay |
+| `overlayColor` | `string` | `'rgba(0,0,0,0.3)'` | — | Overlay color |
+| `dismissOnOverlayPress` | `boolean` | `true` | — | Close on overlay tap |
+| `backgroundColor` | `string` | `'#FFFFFF'` | — | Sidebar background |
+| `borderRadius` | `number` | `0` | — | Border radius |
+| `header` | `ReactNode` | — | — | Header element |
+| `showHeader` | `boolean` | `true` | — | Show header if provided |
+| `showIconBackground` | `boolean` | `false` | — | Icon background circles |
+| `iconBackgroundColor` | `string` | — | — | Icon background color |
+| `activeItemColor` | `string` | `'#F3F4F6'` | — | Active item bg color |
+| `itemTextColor` | `string` | `'#111827'` | — | Menu text color |
+| `shadow` | `boolean` | `true` | — | Drop shadow |
+| `style` | `ViewStyle` | — | — | Container styles |
+| `itemStyle` | `ViewStyle` | — | — | Menu item styles |
+| `headerStyle` | `ViewStyle` | — | — | Header styles |
+
+## SidebarMenuItem
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| `id` | `string` | — | ✓ | Unique identifier |
+| `title` | `string` | — | ✓ | Menu item label |
+| `icon` | `ReactNode` | — | — | Menu icon |
+| `onPress` | `() => void` | — | ✓ | Press callback |
+| `badge` | `number \| string` | — | — | Badge text/number |
+| `badgeColor` | `string` | — | — | Badge background color |
+
+## Examples
+
+### With Badge
+
+```tsx
+const items = [
+  {
+    id: '1',
+    title: 'Messages',
+    icon: <Mail size={20} />,
+    onPress: () => {},
+    badge: '5',
+    badgeColor: '#FF6B6B',
+  },
+  {
+    id: '2',
+    title: 'Notifications',
+    icon: <Bell size={20} />,
+    onPress: () => {},
+    badge: '12',
+  },
+]
+
+<Sidebar visible={visible} onClose={() => {}} items={items} />
+```
+
+### Left Sidebar
+
+```tsx
+<Sidebar
+  visible={visible}
+  onClose={() => setVisible(false)}
+  items={items}
+  side="left"
+/>
+```
+
+### With Header
+
+```tsx
+<Sidebar
+  visible={visible}
+  onClose={() => {}}
+  items={items}
+  header={
+    <View style={{ padding: 16 }}>
+      <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Menu</Text>
+    </View>
+  }
+  showHeader={true}
+/>
+```
+
+### Custom Styling
+
+```tsx
+<Sidebar
+  visible={visible}
+  onClose={() => {}}
+  items={items}
+  backgroundColor="#1F2937"
+  itemTextColor="#F3F4F6"
+  activeItemColor="#374151"
+  borderRadius={12}
+  showIconBackground={true}
+  iconBackgroundColor="#374151"
+/>
+```
+
+### Top/Bottom Navigation
+
+```tsx
+<Sidebar
+  visible={visible}
+  onClose={() => {}}
+  items={items}
+  side="top"
+  height={200}
+/>
+```

@@ -22,7 +22,7 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white dark:bg-black text-black dark:text-white border-b border-zinc-200 dark:border-zinc-800">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
+      <div className={`flex h-16 items-center justify-between px-4 sm:px-6 ${pathname.startsWith('/docs') ? 'mx-auto w-full' : 'mx-auto max-w-7xl'}`}>
 
         {/* Left — Logo */}
         <div className="flex items-center gap-6">
@@ -64,7 +64,7 @@ export function Navbar() {
             className="hover:opacity-90 transition-opacity"
           >
             <svg className="w-6 h-6" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img">
-              <rect width="24" height="24" rx="3" fill="#CB3837" />
+              <rect width="24" height="24" rx="3" fill="#000000" />
               <text x="50%" y="57%" textAnchor="middle" fontFamily="Arial, Helvetica, sans-serif" fontSize="9" fill="white" fontWeight="700">npm</text>
             </svg>
           </a>

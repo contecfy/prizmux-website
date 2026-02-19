@@ -1,0 +1,114 @@
+---
+title: FAB
+description: Floating Action Button for primary actions
+---
+
+Floating Action Button (FAB) component for quick access to primary actions. Supports multiple positions, sizes, labels, and custom styling.
+
+## Basic Usage
+
+```tsx
+import { FAB } from 'prizmux'
+import { Plus } from 'lucide-react-native'
+
+export default function App() {
+  return (
+    <FAB
+      onPress={() => console.log('Create new')}
+      icon={<Plus size={24} color="#fff" />}
+      position="bottom-right"
+    />
+  )
+}
+```
+
+## Props
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| `onPress` | `() => void` | — | ✓ | Callback when button is pressed |
+| `icon` | `ReactNode` | — | — | Icon to display |
+| `label` | `string` | — | — | Text label next to/below icon |
+| `labelPosition` | `'right' \| 'left' \| 'bottom' \| 'top'` | — | — | Position of label relative to icon |
+| `position` | `FABPosition` | `'bottom-right'` | — | Position on screen |
+| `offsetX` | `number` | `16` | — | Horizontal offset from edge |
+| `offsetY` | `number` | `24` | — | Vertical offset from edge |
+| `size` | `'small' \| 'medium' \| 'large'` | `'medium'` | — | FAB size (small=40, medium=56, large=72) |
+| `borderRadius` | `number` | — | — | Border radius (default is circular) |
+| `backgroundColor` | `string` | `'#6366F1'` | — | Background color |
+| `iconColor` | `string` | — | — | Icon color |
+| `labelColor` | `string` | — | — | Label text color |
+| `disabled` | `boolean` | `false` | — | Disables interaction |
+| `loading` | `boolean` | `false` | — | Shows activity indicator |
+| `onLongPress` | `() => void` | — | — | Long press callback |
+| `style` | `ViewStyle` | — | — | Container styles |
+| `labelStyle` | `TextStyle` | — | — | Label text styles |
+| `containerStyle` | `ViewStyle` | — | — | Absolute positioned wrapper styles |
+
+## Positions
+
+```tsx
+// bottom-right (default)
+<FAB position="bottom-right" />
+
+// bottom-left
+<FAB position="bottom-left" />
+
+// bottom-center
+<FAB position="bottom-center" />
+
+// top-right
+<FAB position="top-right" />
+
+// top-left
+<FAB position="top-left" />
+
+// top-center
+<FAB position="top-center" />
+```
+
+## Sizes
+
+```tsx
+<FAB size="small" />       {/* 40px */}
+<FAB size="medium" />      {/* 56px */}
+<FAB size="large" />       {/* 72px */}
+```
+
+## With Label
+
+```tsx
+<FAB
+  icon={<Plus size={20} />}
+  label="Create"
+  labelPosition="right"
+  onPress={() => {}}
+/>
+```
+
+## Custom Styling
+
+```tsx
+<FAB
+  onPress={() => {}}
+  backgroundColor="#00ff00"
+  borderRadius={16}
+  size="large"
+  style={{ shadowOpacity: 0.3 }}
+/>
+```
+
+## Loading State
+
+```tsx
+const [loading, setLoading] = useState(false)
+
+<FAB
+  onPress={async () => {
+    setLoading(true)
+    await createItem()
+    setLoading(false)
+  }}
+  loading={loading}
+/>
+```

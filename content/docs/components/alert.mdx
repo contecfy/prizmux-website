@@ -1,0 +1,103 @@
+---
+title: Alert
+description: Display modal alert dialogs with customizable content, icons, and dismiss behavior.
+---
+
+Alert component provides a way to display modal dialogs to users with a title, message, and optional custom content. Perfect for confirmations, warnings, or important notifications.
+
+## Basic Usage
+
+```tsx
+import { Alert } from 'prizmux'
+import { useState } from 'react'
+
+export default function AlertDemo() {
+  const [visible, setVisible] = useState(false)
+
+  return (
+    <>
+      <Button
+        title="Show Alert"
+        onPress={() => setVisible(true)}
+      />
+      <Alert
+        visible={visible}
+        onClose={() => setVisible(false)}
+        title="Confirm Action"
+        message="Are you sure you want to proceed?"
+      />
+    </>
+  )
+}
+```
+
+## Props
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| `visible` | `boolean` | — | ✓ | Controls alert visibility |
+| `onClose` | `() => void` | — | ✓ | Callback when alert is closed |
+| `title` | `string` | — | — | Alert title text |
+| `message` | `string` | — | — | Alert message text |
+| `icon` | `ReactNode` | — | — | Optional icon displayed above title |
+| `children` | `ReactNode` | — | — | Custom content (overrides message) |
+| `dismissOnBackdropPress` | `boolean` | `true` | — | Dismiss when tapping overlay |
+| `borderRadius` | `number` | `16` | — | Alert box border radius |
+| `backgroundColor` | `string` | `#FFFFFF` | — | Alert background color |
+| `overlayColor` | `string` | `rgba(0,0,0,0.5)` | — | Overlay/backdrop color |
+| `style` | `ViewStyle` | — | — | Alert box container styles |
+| `titleStyle` | `TextStyle` | — | — | Title text styles |
+| `messageStyle` | `TextStyle` | — | — | Message text styles |
+| `overlayStyle` | `ViewStyle` | — | — | Overlay styles |
+| `iconContainerStyle` | `ViewStyle` | — | — | Icon wrapper styles |
+| `contentContainerStyle` | `ViewStyle` | — | — | Children wrapper styles |
+
+## Examples
+
+### With Custom Content
+
+```tsx
+<Alert
+  visible={visible}
+  onClose={() => setVisible(false)}
+  title="Custom Alert"
+>
+  <View style={{ padding: 16 }}>
+    <Text>This is custom content</Text>
+    <Button
+      title="Confirm"
+      onPress={() => setVisible(false)}
+      variant="filled"
+    />
+  </View>
+</Alert>
+```
+
+### With Icon
+
+```tsx
+import { InfoIcon } from 'lucide-react-native'
+
+<Alert
+  visible={visible}
+  onClose={() => setVisible(false)}
+  title="Information"
+  message="This is an informational alert"
+  icon={<InfoIcon size={32} color="#6366F1" />}
+/>
+```
+
+### With Custom Styling
+
+```tsx
+<Alert
+  visible={visible}
+  onClose={() => setVisible(false)}
+  title="Styled Alert"
+  message="Custom styled alert"
+  borderRadius={24}
+  backgroundColor="#F3F4F6"
+  titleStyle={{ fontSize: 20, fontWeight: 'bold', color: '#000' }}
+  messageStyle={{ fontSize: 14, color: '#666' }}
+/>
+```

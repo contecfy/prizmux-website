@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import clsx from "clsx"
-import { BookOpen, Package, Zap, Layout, Image, ArrowLeft, Database, Phone } from "lucide-react"
+import { BookOpen, Package, Zap, Layout } from "lucide-react"
 import { useState } from "react"
 
 const navigation = [
@@ -18,13 +18,17 @@ const navigation = [
   {
     title: "Components",
     items: [
+      { title: "Alert", href: "/docs/components/alert", icon: Package },
+      { title: "BottomSheet", href: "/docs/components/bottom-sheet", icon: Package },
       { title: "Button", href: "/docs/components/button", icon: Layout },
       { title: "Card", href: "/docs/components/card", icon: Package },
-      { title: "BottomSheet", href: "/docs/components/bottom-sheet", icon: Database },
-      { title: "ImagePreview", href: "/docs/components/image-preview", icon: Image },
-      { title: "HeaderWithBack", href: "/docs/components/header-with-back", icon: ArrowLeft },
-      { title: "EmptyState", href: "/docs/components/empty-state", icon: Layout },
-      { title: "PhoneInput", href: "/docs/components/phone-input", icon: Phone },
+      { title: "EmptyState", href: "/docs/components/empty-state", icon: Package },
+      { title: "FAB", href: "/docs/components/fab", icon: Zap },
+      { title: "Header", href: "/docs/components/header", icon: Package },
+      { title: "ImagePreview", href: "/docs/components/image-preview", icon: Package },
+      { title: "PhoneInput", href: "/docs/components/phone-input", icon: Package },
+      { title: "Sidebar", href: "/docs/components/sidebar", icon: Package },
+      { title: "Toast", href: "/docs/components/toast", icon: Package },
     ],
   },
 ]
@@ -34,10 +38,10 @@ export function Sidebar() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const SidebarContent = () => (
-    <div className="px-4 sm:px-6 py-6 space-y-6 sm:space-y-8">
+    <nav className="px-3 sm:px-4 py-6 space-y-8">
       {navigation.map((section) => (
-        <div key={section.title}>
-          <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+        <div key={section.title} className="space-y-3">
+          <h4 className="px-3 text-xs font-semibold uppercase tracking-widest text-zinc-500 dark:text-zinc-500 mb-4">
             {section.title}
           </h4>
 
@@ -51,15 +55,18 @@ export function Sidebar() {
                   <Link
                     href={item.href}
                     className={clsx(
-                      "flex items-center gap-3 border-l px-3 py-2 text-sm transition-colors",
+                      "relative flex items-center gap-3 px-3 py-2.5 text-sm font-medium transition-all duration-200",
                       isActive
-                        ? "border-zinc-900 dark:border-zinc-100 text-zinc-900 dark:text-zinc-100"
-                        : "border-transparent text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100"
+                        ? "text-zinc-900 dark:text-white bg-zinc-100 dark:bg-zinc-900 rounded-lg"
+                        : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-900/50 rounded-lg"
                     )}
                     onClick={() => setMobileOpen(false)}
                   >
+                    {isActive && (
+                      <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#00ff00] rounded-r-full" />
+                    )}
                     <Icon className="w-4 h-4 flex-shrink-0" />
-                    {item.title}
+                    <span className="flex-1">{item.title}</span>
                   </Link>
                 </li>
               )
@@ -67,13 +74,13 @@ export function Sidebar() {
           </ul>
         </div>
       ))}
-    </div>
+    </nav>
   )
 
   return (
     <>
       {/* Desktop Sidebar - hidden on mobile */}
-      <aside className="hidden md:block fixed top-16 left-0 h-[calc(100vh-64px)] w-48 lg:w-64 border-r border-zinc-200 dark:border-zinc-800 overflow-y-auto bg-white dark:bg-black">
+      <aside className="hidden md:block fixed top-16 left-0 h-[calc(100vh-64px)] w-56 border-r border-zinc-200 dark:border-zinc-800 overflow-y-auto bg-white dark:bg-black scrollbar-thin scrollbar-thumb-zinc-300 dark:scrollbar-thumb-zinc-700 scrollbar-track-transparent">
         <SidebarContent />
       </aside>
 

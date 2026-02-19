@@ -1,0 +1,157 @@
+---
+title: Toast
+description: Toast notification component
+---
+
+Toast component for displaying temporary notifications. Supports multiple types, positions, swipe-to-dismiss, and custom styling.
+
+## Basic Usage
+
+```tsx
+import { Toast } from 'prizmux'
+import { useState } from 'react'
+
+export default function App() {
+  const [visible, setVisible] = useState(false)
+
+  return (
+    <>
+      <Button title="Show Toast" onPress={() => setVisible(true)} />
+      <Toast
+        visible={visible}
+        onHide={() => setVisible(false)}
+        text="Action completed!"
+        type="success"
+      />
+    </>
+  )
+}
+```
+
+## Props
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| `visible` | `boolean` | — | ✓ | Toast visibility |
+| `onHide` | `() => void` | — | ✓ | Hide callback |
+| `text` | `string` | — | ✓ | Toast message |
+| `description` | `string` | — | — | Additional description |
+| `type` | `'success' \| 'error' \| 'info' \| 'warning'` | `'info'` | — | Toast type |
+| `position` | `'top' \| 'bottom'` | `'bottom'` | — | Toast position |
+| `dismiss` | `'auto' \| 'manual' \| 'both'` | `'auto'` | — | Dismiss behavior |
+| `duration` | `number` | `3000` | — | Auto-hide duration (ms) |
+| `swipeable` | `boolean` | `true` | — | Enable swipe to dismiss |
+| `swipeDirection` | `'horizontal' \| 'vertical' \| 'both'` | `'vertical'` | — | Swipe direction |
+| `swipeThreshold` | `number` | — | — | Swipe distance threshold |
+| `icon` | `ReactNode` | — | — | Custom icon |
+| `closeIcon` | `ReactNode` | — | — | Custom close icon |
+| `backgroundColor` | `string` | — | — | Background color |
+| `textColor` | `string` | — | — | Text color |
+| `descriptionColor` | `string` | — | — | Description text color |
+| `borderRadius` | `number` | `10` | — | Border radius |
+| `style` | `ViewStyle` | — | — | Container styles |
+| `textStyle` | `TextStyle` | — | — | Text styles |
+| `descriptionStyle` | `TextStyle` | — | — | Description styles |
+| `iconContainerStyle` | `ViewStyle` | — | — | Icon wrapper styles |
+| `closeButtonStyle` | `ViewStyle` | — | — | Close button styles |
+| `overlayStyle` | `ViewStyle` | — | — | Overlay styles |
+
+## Types
+
+```tsx
+// Success
+<Toast text="Saved successfully" type="success" />
+
+// Error
+<Toast text="Something went wrong" type="error" />
+
+// Info
+<Toast text="This is informational" type="info" />
+
+// Warning
+<Toast text="Be careful" type="warning" />
+```
+
+## Positions
+
+```tsx
+// Top
+<Toast text="Message" position="top" />
+
+// Bottom (default)
+<Toast text="Message" position="bottom" />
+```
+
+## Dismiss Behavior
+
+```tsx
+// Auto-dismiss (default)
+<Toast
+  text="Auto dismissing..."
+  dismiss="auto"
+  duration={3000}
+/>
+
+// Manual dismiss
+<Toast
+  text="Manual only"
+  dismiss="manual"
+/>
+
+// Both
+<Toast
+  text="Either way"
+  dismiss="both"
+/>
+```
+
+## With Description
+
+```tsx
+<Toast
+  text="Upload complete"
+  description="File uploaded successfully to the server"
+  type="success"
+/>
+```
+
+## Custom Icons
+
+```tsx
+import { CheckCircle, AlertCircle } from 'lucide-react-native'
+
+<Toast
+  text="Success!"
+  type="success"
+  icon={<CheckCircle size={24} color="#fff" />}
+/>
+
+<Toast
+  text="Warning!"
+  type="warning"
+  icon={<AlertCircle size={24} color="#fff" />}
+/>
+```
+
+## Custom Styling
+
+```tsx
+<Toast
+  text="Styled toast"
+  backgroundColor="#00ff00"
+  textColor="#000"
+  borderRadius={20}
+  style={{ paddingVertical: 16 }}
+/>
+```
+
+## Swipe to Dismiss
+
+```tsx
+<Toast
+  text="Swipe me away"
+  swipeable={true}
+  swipeDirection="horizontal"
+  swipeThreshold={100}
+/>
+```

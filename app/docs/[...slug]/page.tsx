@@ -46,13 +46,22 @@ const mdxComponents = {
     <a className="hover:underline" {...props} style={{ color: '#00ff00' }} />
   ),
   table: (props: any) => (
-    <table className="w-full border-collapse my-4" {...props} />
+    <table className="w-full border-collapse my-6 text-sm" {...props} />
+  ),
+  thead: (props: any) => (
+    <thead className="bg-zinc-100 dark:bg-zinc-900" {...props} />
+  ),
+  tbody: (props: any) => (
+    <tbody {...props} />
+  ),
+  tr: (props: any) => (
+    <tr className="border-b border-zinc-200 dark:border-zinc-700" {...props} />
   ),
   th: (props: any) => (
-    <th className="border border-zinc-300 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-900 px-4 py-2 text-left font-semibold" {...props} />
+    <th className="border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-900 px-4 py-3 text-left font-semibold text-zinc-900 dark:text-zinc-100" {...props} />
   ),
   td: (props: any) => (
-    <td className="border border-zinc-300 dark:border-zinc-700 px-4 py-2" {...props} />
+    <td className="border border-zinc-200 dark:border-zinc-700 px-4 py-3 text-zinc-700 dark:text-zinc-300" {...props} />
   ),
 }
 

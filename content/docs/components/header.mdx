@@ -1,0 +1,120 @@
+---
+title: Header
+description: Header component with title, back button, and actions
+---
+
+Header component for displaying page titles, navigation, and action buttons. Includes back button, avatar support, and action menu.
+
+## Basic Usage
+
+```tsx
+import { Header } from 'prizmux'
+import { ArrowLeft } from 'lucide-react-native'
+
+export default function App() {
+  return (
+    <Header
+      title="Page Title"
+      onBackPress={() => navigation.goBack()}
+    />
+  )
+}
+```
+
+## Props
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| `title` | `string` | — | ✓ | Header title text |
+| `showBack` | `boolean` | `false` | — | Show back button |
+| `onBackPress` | `() => void` | — | — | Back button callback |
+| `backIcon` | `ReactNode` | — | — | Custom back icon |
+| `avatar` | `ReactNode` | — | — | Avatar/image element |
+| `titlePosition` | `'left' \| 'center' \| 'right'` | `'left'` | — | Title alignment |
+| `actions` | `HeaderAction[]` | — | — | Action buttons array |
+
+## HeaderAction
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| `icon` | `ReactNode` | — | ✓ | Action icon |
+| `onPress` | `() => void` | — | ✓ | Action callback |
+| `badge` | `number \| string` | — | — | Badge number/text |
+
+## Examples
+
+### With Back Button
+
+```tsx
+<Header
+  title="Details"
+  showBack={true}
+  onBackPress={() => navigation.goBack()}
+/>
+```
+
+### With Actions
+
+```tsx
+import { MoreVertical, Share } from 'lucide-react-native'
+
+<Header
+  title="Post"
+  showBack={true}
+  onBackPress={() => {}}
+  actions={[
+    {
+      icon: <Share size={20} />,
+      onPress: () => console.log('Share'),
+    },
+    {
+      icon: <MoreVertical size={20} />,
+      onPress: () => console.log('More'),
+    },
+  ]}
+/>
+```
+
+### With Avatar and Centered Title
+
+```tsx
+<Header
+  title="Profile"
+  titlePosition="center"
+  avatar={<Image source={require('./avatar.png')} />}
+  actions={[
+    {
+      icon: <Settings size={20} />,
+      onPress: () => {},
+    },
+  ]}
+/>
+```
+
+### With Badge
+
+```tsx
+<Header
+  title="Messages"
+  actions={[
+    {
+      icon: <Bell size={20} />,
+      badge: '5',
+      onPress: () => {},
+    },
+  ]}
+/>
+```
+
+### Custom Back Icon
+
+```tsx
+import { X } from 'lucide-react-native'
+
+<Header
+  title="Modal"
+  showBack={true}
+  backIcon={<X size={24} />}
+  onBackPress={() => {}}
+/>
+```
