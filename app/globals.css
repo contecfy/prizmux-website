@@ -71,3 +71,48 @@ pre.shiki, pre.shiki * {
 .prose-content > div > h2:first-of-type {
   @apply mt-0;
 }
+/* Custom Scrollbar Styling - Smaller, Rounded, Modern */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d4d4d8;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1aa;
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+
+.dark::-webkit-scrollbar-thumb {
+  background: #52525b;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.dark::-webkit-scrollbar-thumb:hover {
+  background: #71717a;
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+
+/* Firefox Scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #d4d4d8 transparent;
+}
+
+.dark {
+  scrollbar-color: #52525b transparent;
+}

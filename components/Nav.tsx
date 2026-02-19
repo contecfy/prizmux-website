@@ -4,6 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { ThemeToggle } from "./theme-toogle"
 import { useState } from "react"
+import Image from "next/image"
 
 export function Navbar() {
   const pathname = usePathname()
@@ -25,11 +26,13 @@ export function Navbar() {
 
         {/* Left — Logo */}
         <div className="flex items-center gap-6">
+          <Image src="/logo.png" width={30} height={30} alt="prizmux logo"/>
           <Link
             href="/"
-            className="text-green-500 font-bold text-base sm:text-lg tracking-tight hover:opacity-80 transition-opacity font-orbitron"
+            className="font-bold text-base sm:text-lg tracking-tight hover:opacity-80 transition-opacity font-orbitron"
+            style={{ color: '#00ff00' }}
           >
-            PRIZMUX
+            Prizmux
           </Link>
         </div>
 

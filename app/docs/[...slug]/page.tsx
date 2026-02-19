@@ -30,7 +30,7 @@ const mdxComponents = {
     <li className="ml-4" {...props} />
   ),
   blockquote: (props: any) => (
-    <blockquote className="border-l-4 border-green-500 pl-4 py-2 my-4 text-zinc-600 dark:text-zinc-400 italic" {...props} />
+    <blockquote className="border-l-4 pl-4 py-2 my-4 text-zinc-600 dark:text-zinc-400 italic" {...props} style={{ borderLeftColor: '#00ff00' }} />
   ),
   code: (props: any) => (
     <code className="bg-zinc-100 dark:bg-zinc-900 px-2 py-1 rounded text-sm font-mono text-zinc-900 dark:text-zinc-100" {...props} />
@@ -43,7 +43,7 @@ const mdxComponents = {
     return <pre className="bg-zinc-100 dark:bg-zinc-900 p-4 rounded overflow-x-auto my-4" {...props} />
   },
   a: (props: any) => (
-    <a className="text-green-500 dark:text-green-400 hover:underline" {...props} />
+    <a className="hover:underline" {...props} style={{ color: '#00ff00' }} />
   ),
   table: (props: any) => (
     <table className="w-full border-collapse my-4" {...props} />

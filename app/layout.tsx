@@ -74,7 +74,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
         <link rel="manifest" href="/manifest.json" />
       </head>
-      <body className="bg-white text-[#09090b] dark:bg-[#09090b] dark:text-[#fafafa]">
+      <body
+        className="bg-white text-[#09090b] dark:bg-[#09090b] dark:text-[#fafafa]"
+        style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif" }}
+      >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Navbar />
           <main>{children}</main>
