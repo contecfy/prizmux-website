@@ -62,8 +62,8 @@ export function Footer() {
           <div className="space-y-4">
             <h4 className="text-sm text-zinc-900 dark:text-white font-medium">Community</h4>
             <ul className="space-y-3 text-sm">
-              <li><Link href="#" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">GitHub</Link></li>
-              <li><Link href="#" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Issues</Link></li>
+              <li><Link href="https://github.com/contecfy/prizmux" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">GitHub</Link></li>
+              <li><Link href="https://github.com/contecfy/prizmux/issues" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Issues</Link></li>
               <li><Link href="#" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Discussions</Link></li>
             </ul>
           </div>
