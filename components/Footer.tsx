@@ -42,9 +42,9 @@ export function Footer() {
           <div className="space-y-4">
             <h4 className="text-sm text-zinc-900 dark:text-white font-medium">Product</h4>
             <ul className="space-y-3 text-sm">
-              <li><Link href="#" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Components</Link></li>
-              <li><Link href="#" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Changelog</Link></li>
-              <li><Link href="#" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Docs</Link></li>
+              <li><Link href="/docs/introduction" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Components</Link></li>
+              <li><Link href="/changelog" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Changelog</Link></li>
+              <li><Link href="/docs" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Docs</Link></li>
             </ul>
           </div>
 
@@ -52,9 +52,9 @@ export function Footer() {
           <div className="space-y-4">
             <h4 className="text-sm text-zinc-900 dark:text-white font-medium">Resources</h4>
             <ul className="space-y-3 text-sm">
-              <li><Link href="#" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Installation</Link></li>
-              <li><Link href="#" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Guides</Link></li>
-              <li><Link href="#" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Examples</Link></li>
+              <li><Link href="/docs/introduction" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Installation</Link></li>
+              {/* <li><Link href="#" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Guides</Link></li> */}
+              <li><Link href="https://github.com/contecfy/prizmux/tree/main/examples/sample" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Examples</Link></li>
             </ul>
           </div>
 
@@ -64,7 +64,7 @@ export function Footer() {
             <ul className="space-y-3 text-sm">
               <li><Link href="https://github.com/contecfy/prizmux" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">GitHub</Link></li>
               <li><Link href="https://github.com/contecfy/prizmux/issues" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Issues</Link></li>
-              <li><Link href="#" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Discussions</Link></li>
+              {/* <li><Link href="#" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Discussions</Link></li> */}
             </ul>
           </div>
 
