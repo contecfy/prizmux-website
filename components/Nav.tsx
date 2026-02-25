@@ -79,7 +79,7 @@ export function Navbar() {
           </a>
 
           <a
-            href="https://github.com/your-username/prizmux"
+            href="https://github.com/contecfy/prizmux"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:opacity-80 transition-opacity"
