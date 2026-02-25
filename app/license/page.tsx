@@ -25,7 +25,7 @@ export default function LicensePage() {
         <div className="bg-zinc-50 dark:bg-zinc-900/50 rounded-lg border border-zinc-200 dark:border-zinc-800 p-8 sm:p-12 font-mono text-sm leading-relaxed space-y-4">
           <p className="font-semibold text-base">MIT License</p>
           
-          <p>Copyright (c) 2024 Prizmux</p>
+          <p>Copyright (c) 2025 Prizmux</p>
 
           <p>
             Permission is hereby granted, free of charge, to any person obtaining a copy
