@@ -42,7 +42,7 @@ export function Footer() {
           <div className="space-y-4">
             <h4 className="text-sm text-zinc-900 dark:text-white font-medium">Product</h4>
             <ul className="space-y-3 text-sm">
-              <li><Link href="/docs/introduction" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Components</Link></li>
+              <li><Link href="/docs/components/alert" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Components</Link></li>
               <li><Link href="/changelog" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Changelog</Link></li>
               <li><Link href="/docs" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Docs</Link></li>
             </ul>
