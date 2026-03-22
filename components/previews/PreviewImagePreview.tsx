@@ -27,7 +27,7 @@ export function PreviewImagePreview({ title }: PreviewImagePreviewProps) {
 
       {show && (
         <div 
-            className="fixed inset-0 z-[100] bg-black animate-in fade-in duration-300 flex flex-col"
+            className="absolute inset-0 z-[100] bg-black animate-in fade-in duration-300 flex flex-col"
             onClick={() => setShow(false)}
         >
           <header className="p-6 flex items-center justify-between z-10">

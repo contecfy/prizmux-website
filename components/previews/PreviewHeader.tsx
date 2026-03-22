@@ -17,10 +17,10 @@ export function PreviewHeader({
 }: PreviewHeaderProps) {
   return (
     <div 
-      className="w-full max-w-md bg-white dark:bg-zinc-950 rounded-xl overflow-hidden shadow-lg border border-zinc-200 dark:border-zinc-800"
+      className="absolute top-0 inset-x-0 z-40 bg-white dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800"
     >
       <header 
-        className="flex items-center px-4 py-4 border-b"
+        className="flex items-center px-4 py-4"
         style={{ backgroundColor, borderColor }}
       >
         <button className="p-2 mr-2">

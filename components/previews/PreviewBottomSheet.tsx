@@ -33,13 +33,13 @@ export function PreviewBottomSheet({
 
   return (
     <div 
-      className={`fixed inset-0 z-[100] flex items-end justify-center transition-opacity duration-300 ${visible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+      className={`absolute inset-0 z-[100] flex items-end justify-center transition-opacity duration-300 ${visible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
       style={{ backgroundColor: 'rgba(0,0,0,0.4)' }}
       onClick={onClose}
       onTransitionEnd={() => !visible && setShouldRender(false)}
     >
       <div 
-        className={`w-full max-w-xl transition-transform duration-300 ease-out p-6 shadow-2xl ${visible ? 'translate-y-0' : 'translate-y-full'}`}
+        className={`w-full transition-transform duration-300 ease-out p-6 shadow-2xl ${visible ? 'translate-y-0' : 'translate-y-full'}`}
         style={{ 
           backgroundColor, 
           borderTopLeftRadius: `${borderRadius}px`,

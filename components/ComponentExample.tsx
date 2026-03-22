@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useState } from 'react'
-import { CodeBlock } from './code-block'
 import { PreviewButton } from './previews/PreviewButton'
 import { PreviewAlertDemo } from './previews/PreviewAlert'
 import { PreviewFAB } from './previews/PreviewFAB'
@@ -13,6 +12,8 @@ import { PreviewCardDemo } from './previews/PreviewCard'
 import { PreviewEmptyState } from './previews/PreviewEmptyState'
 import { PreviewImagePreview } from './previews/PreviewImagePreview'
 
+import { DeviceMockup } from './DeviceMockup'
+
 interface ComponentExampleProps {
   name: string
   code: string
@@ -20,16 +21,16 @@ interface ComponentExampleProps {
 }
 
 const PREVIEWS: Record<string, any> = {
-  Button: (props: any) => <div className="flex items-center justify-center p-8"><PreviewButton title="Press Me" {...props} /></div>,
-  Alert: () => <PreviewAlertDemo />,
-  FAB: (props: any) => <div className="flex items-center justify-center p-8"><PreviewFAB label="New Task" {...props} /></div>,
-  Toast: () => <PreviewToastDemo />,
-  BottomSheet: () => <PreviewBottomSheetDemo />,
-  Header: (props: any) => <div className="flex items-center justify-center p-8"><PreviewHeader title="Home Screen" {...props} /></div>,
-  PhoneInput: (props: any) => <div className="flex items-center justify-center p-8"><PreviewPhoneInput {...props} /></div>,
-  Card: () => <PreviewCardDemo />,
-  EmptyState: (props: any) => <div className="flex items-center justify-center p-8"><PreviewEmptyState title="No Data Found" description="Try adjusting your filters to find what you're looking for." {...props} /></div>,
-  ImagePreview: (props: any) => <PreviewImagePreview {...props} />,
+  Button: (props: any) => <div className="flex items-center justify-center h-full"><PreviewButton title="Press Me" {...props} /></div>,
+  Alert: () => <div className="h-full w-full"><PreviewAlertDemo /></div>,
+  FAB: (props: any) => <div className="h-full w-full relative"><PreviewFAB label="New Task" {...props} /></div>,
+  Toast: () => <div className="h-full w-full"><PreviewToastDemo /></div>,
+  BottomSheet: () => <div className="h-full w-full"><PreviewBottomSheetDemo /></div>,
+  Header: (props: any) => <div className="h-full w-full"><PreviewHeader title="Home Screen" {...props} /></div>,
+  PhoneInput: (props: any) => <div className="flex items-center justify-center h-full"><PreviewPhoneInput {...props} /></div>,
+  Card: () => <div className="flex items-center justify-center h-full p-4"><PreviewCardDemo /></div>,
+  EmptyState: (props: any) => <div className="flex items-center justify-center h-full"><PreviewEmptyState title="No Data Found" description="Try adjusting your filters to find what you're looking for." {...props} /></div>,
+  ImagePreview: (props: any) => <div className="h-full w-full"><PreviewImagePreview {...props} /></div>,
 }
 
 export function ComponentExample({ name, code, previewProps }: ComponentExampleProps) {
@@ -61,12 +62,16 @@ export function ComponentExample({ name, code, previewProps }: ComponentExampleP
 
       <div className="relative">
         {activeTab === 'preview' ? (
-          <div className="min-h-[200px] flex items-center justify-center">
-            <Preview {...previewProps} />
+          <div className="min-h-[600px] flex items-center justify-center bg-zinc-50/50 dark:bg-zinc-900/10 py-12">
+            <DeviceMockup>
+              <Preview {...previewProps} />
+            </DeviceMockup>
           </div>
         ) : (
-          <div className="overflow-hidden">
-            <CodeBlock className="language-tsx rounded-none border-0 m-0">{code.trim()}</CodeBlock>
+          <div className="overflow-hidden bg-[#fafafa] dark:bg-[#0d1117] p-6 text-sm font-mono overflow-auto max-h-[500px]">
+            <pre className="text-zinc-900 dark:text-zinc-100 leading-relaxed">
+              <code>{(code || "").trim()}</code>
+            </pre>
           </div>
         )}
       </div>

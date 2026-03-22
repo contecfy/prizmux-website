@@ -41,7 +41,7 @@ export function PreviewToast({
 
   return (
     <div 
-      className={`fixed bottom-8 right-8 z-[100] max-w-sm w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-4 shadow-xl rounded-xl flex items-start gap-3 transition-all duration-300 ${visible ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-4 opacity-0 scale-95 pointer-events-none'}`}
+      className={`absolute bottom-4 inset-x-4 z-[100] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-4 shadow-xl rounded-xl flex items-start gap-3 transition-all duration-300 ${visible ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-4 opacity-0 scale-95 pointer-events-none'}`}
       onTransitionEnd={() => !visible && setShouldRender(false)}
       style={{ 
         boxShadow: `0 10px 25px -5px ${shadowColor}`,
