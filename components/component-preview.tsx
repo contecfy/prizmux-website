@@ -5,35 +5,53 @@ interface ComponentCard {
   description: string
 }
 
-const components: ComponentCard[] = [
-  { name: "ImagePreview", description: "Quick image display" },
-  { name: "Toast", description: "Notification with dismiss option" },
-  { name: "PhoneInput", description: "Phone number input with formatting" },
-  { name: "BottomSheet", description: "Slide-up panel for additional content" },
+import { PreviewButton } from './previews/PreviewButton'
+import { PreviewAlertDemo } from './previews/PreviewAlert'
+import { PreviewFAB } from './previews/PreviewFAB'
+import { PreviewBottomSheetDemo } from './previews/PreviewBottomSheet'
+import { PreviewToastDemo } from './previews/PreviewToast'
+
+import { PreviewCardDemo } from './previews/PreviewCard'
+import { PreviewEmptyState } from './previews/PreviewEmptyState'
+import { PreviewHeader } from './previews/PreviewHeader'
+import { PreviewImagePreview } from './previews/PreviewImagePreview'
+import { PreviewPhoneInput } from './previews/PreviewPhoneInput'
+
+const components = [
+  { name: "Button", description: "Versatile button with variants", Preview: () => <PreviewButton title="Press Me" showShadow={true} /> },
+  { name: "Alert", description: "Modal alert dialogs", Preview: () => <PreviewAlertDemo /> },
+  { name: "FAB", description: "Floating action button", Preview: () => <PreviewFAB showShadow={true} /> },
+  { name: "BottomSheet", description: "Slide-up panel", Preview: () => <PreviewBottomSheetDemo /> },
+  { name: "Toast", description: "Floating notifications", Preview: () => <PreviewToastDemo /> },
+  { name: "Card", description: "Flexible container", Preview: () => <PreviewCardDemo /> },
+  { name: "EmptyState", description: "Helpful placeholders", Preview: () => <PreviewEmptyState title="No Data Found" description="Try adjusting your filters." /> },
+  { name: "Header", description: "Navigation headers", Preview: () => <PreviewHeader title="Home Screen" /> },
+  { name: "ImagePreview", description: "Intuitive galleries", Preview: () => <PreviewImagePreview /> },
+  { name: "PhoneInput", description: "International inputs", Preview: () => <PreviewPhoneInput /> },
 ]
 
 export function ComponentPreview() {
   return (
-    <section className="mx-auto max-w-6xl px-4 sm:px-6 py-12 sm:py-24">
-      <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight mb-8 sm:mb-12 text-center">
-        Components
+    <section className="mx-auto max-w-6xl px-4 sm:px-6 py-12 sm:py-24 w-full">
+      <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-8 sm:mb-16 text-center text-black dark:text-white">
+        Explore Components
       </h2>
 
-      <div className="grid gap-4 sm:gap-6 md:gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {components.map((comp) => (
           <div
             key={comp.name}
-            className="rounded-md border border-zinc-200 dark:border-zinc-800 p-4 sm:p-6 flex flex-col items-center hover:shadow-md transition-shadow"
+            className="group relative rounded-3xl border border-zinc-200 dark:border-zinc-800 p-6 flex flex-col items-center hover:border-[#00ff00] transition-all duration-300 bg-white dark:bg-zinc-950 shadow-sm hover:shadow-xl hover:shadow-[#00ff00]/5"
           >
-            {/* Placeholder preview box */}
-            <div className="h-20 sm:h-24 w-full mb-3 sm:mb-4 rounded bg-zinc-100 dark:bg-zinc-900 flex items-center justify-center text-sm sm:text-base text-zinc-500 dark:text-zinc-400">
-              Preview
+            {/* Real Preview Box */}
+            <div className="w-full h-48 mb-6 rounded-2xl bg-zinc-50 dark:bg-zinc-900/50 flex items-center justify-center overflow-hidden border border-zinc-100 dark:border-zinc-800/50">
+               <comp.Preview />
             </div>
 
-            <h3 className="text-base sm:text-lg font-semibold tracking-tight mb-1 text-center">
+            <h3 className="text-xl font-bold tracking-tight mb-2 text-black dark:text-white group-hover:text-[#00ff00] transition-colors">
               {comp.name}
             </h3>
-            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 text-center">
+            <p className="text-zinc-600 dark:text-zinc-400 text-center text-sm leading-relaxed">
               {comp.description}
             </p>
           </div>

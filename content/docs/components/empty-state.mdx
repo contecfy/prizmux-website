@@ -19,9 +19,11 @@ EmptyState creates a consistent, informative experience when content is unavaila
 
 ## Basic Usage
 
-```tsx
+<ComponentExample 
+  name="EmptyState"
+  code={`
 import { EmptyState } from 'prizmux'
-import { Text, View } from 'react-native'
+import { Text } from 'react-native'
 
 export default function NoResults() {
   return (
@@ -32,7 +34,8 @@ export default function NoResults() {
     />
   )
 }
-```
+  `}
+/>
 
 ## With Action Button
 

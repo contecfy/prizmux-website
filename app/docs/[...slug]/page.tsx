@@ -8,7 +8,10 @@ interface PageProps {
   params: Promise<{ slug: string[] }>
 }
 
+import { ComponentExample } from "@/components/ComponentExample"
+
 const mdxComponents = {
+  ComponentExample,
   h1: (props: any) => (
     <h1 className="text-4xl font-bold tracking-tight text-black dark:text-white mt-0 mb-6" {...props} />
   ),
