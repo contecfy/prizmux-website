@@ -101,7 +101,7 @@ Each component page covers:
 ## Getting Started (local dev)
 
 ```bash
-git clone https://github.com/your-username/prizmux-web
+git clone https://github.com/contecfy/prizmux-web
 cd prizmux-web
 npm install
 npm run dev

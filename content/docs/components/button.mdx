@@ -216,26 +216,31 @@ The Button component is fully accessible:
 | `icon` | `ReactNode` | - | Icon to display |
 | `iconPosition` | `'left' \| 'right'` | `'left'` | Position of icon relative to title |
 | `fullWidth` | `boolean` | `false` | Stretch button to full width |
-| `borderRadius` | `number` | `0` | Border radius in pixels |
-| `hitSlop` | `number` | - | Increase tap target area (mobile accessibility) |
+| `borderRadius` | `number` | `8` | Corner radius in pixels |
+| `backgroundColor` | `string` | - | Override base background color |
+| `textColor` | `string` | - | Override text color |
+| `borderColor` | `string` | - | Override border color (outline mode) |
+| `showShadow` | `boolean` | `true` | Toggle elevation/shadow |
+| `shadowColor` | `string` | - | Custom color for the shadow |
+| `pressedBackgroundColor` | `string` | - | Feedback color when held |
+| `onLongPress` | `() => void` | - | Callback for long press gestures |
+| `hitSlop` | `number` | - | Increase tap target area |
 | `accessibilityLabel` | `string` | - | Screen reader label |
 | `style` | `ViewStyle` | - | Custom button container styles |
 | `contentStyle` | `ViewStyle` | - | Custom inner content wrapper styles |
 | `textStyle` | `TextStyle` | - | Custom button text styles |
-| `onLongPress` | `() => void` | - | Callback for long press gestures |
 
 ```tsx
-<Button title="Primary" variant="primary" />
-<Button title="Secondary" variant="secondary" />
+<Button title="Filled" variant="filled" />
 <Button title="Outline" variant="outline" />
 ```
 
 ### Sizes
 
 ```tsx
-<Button title="Small" size="sm" />
-<Button title="Medium" size="md" />
-<Button title="Large" size="lg" />
+<Button title="Small" size="small" />
+<Button title="Medium" size="medium" />
+<Button title="Large" size="large" />
 ```
 
 ### With Icon
@@ -255,21 +260,15 @@ export default function App() {
 }
 ```
 
-### Loading State
+### Shadow & Feedback
 
 ```tsx
-const [loading, setLoading] = useState(false)
-
-const handleSubmit = async () => {
-  setLoading(true)
-  await submitForm()
-  setLoading(false)
-}
-
 <Button 
-  title="Submit" 
-  loading={loading}
-  onPress={handleSubmit}
+  title="Press Me" 
+  showShadow={true}
+  shadowColor="#6366F1"
+  pressedBackgroundColor="#4F46E5"
+  onPress={() => {}}
 />
 ```
 

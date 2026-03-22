@@ -35,7 +35,7 @@ export function Navbar() {
 
         {/* Left — Logo */}
         <div className="flex items-center gap-6">
-          <Image src="/logo.png" width={30} height={30} alt="prizmux logo"/>
+          <Image src="/logo.png" width={30} height={30} alt="prizmux logo" />
           <Link
             href="/"
             className="font-bold text-base sm:text-lg tracking-tight hover:opacity-80 transition-opacity font-orbitron"
@@ -53,9 +53,8 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`px-3 py-1 text-sm font-medium hover:opacity-80 transition-opacity ${
-                  isActive ? "border-b-2 border-black dark:border-white" : ""
-                }`}
+                className={`px-3 py-1 text-sm font-medium hover:opacity-80 transition-opacity ${isActive ? "border-b-2 border-black dark:border-white" : ""
+                  }`}
               >
                 {link.label}
               </Link>
@@ -115,9 +114,8 @@ export function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`block px-3 py-2 rounded text-sm font-medium hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors ${
-                    isActive ? "bg-zinc-100 dark:bg-zinc-900 border-l-2 border-black dark:border-white" : ""
-                  }`}
+                  className={`block px-3 py-2 rounded text-sm font-medium hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors ${isActive ? "bg-zinc-100 dark:bg-zinc-900 border-l-2 border-black dark:border-white" : ""
+                    }`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.label}

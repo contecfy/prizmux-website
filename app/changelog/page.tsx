@@ -42,7 +42,7 @@ export default function ChangelogPage() {
               View Docs
             </Link>
             <a
-              href="https://github.com/your-username/prizmux"
+              href="https://github.com/contecfy/prizmux"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex justify-center border border-black dark:border-white text-black dark:text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black transition-colors text-sm sm:text-base"
@@ -57,21 +57,21 @@ export default function ChangelogPage() {
           <div className="p-6 rounded-lg border border-zinc-200 dark:border-zinc-800">
             <h3 className="font-semibold mb-2 text-lg">Latest Release</h3>
             <p className="text-sm text-zinc-600 dark:text-zinc-400">
-              Check our <a href="https://github.com/your-username/prizmux" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">GitHub Releases</a> for the latest updates.
+              Check our <a href="https://github.com/contecfy/prizmux" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">GitHub Releases</a> for the latest updates.
             </p>
           </div>
 
           <div className="p-6 rounded-lg border border-zinc-200 dark:border-zinc-800">
             <h3 className="font-semibold mb-2 text-lg">Report Issues</h3>
             <p className="text-sm text-zinc-600 dark:text-zinc-400">
-              Found a bug? Please create an <a href="https://github.com/your-username/prizmux/issues" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">issue on GitHub</a>.
+              Found a bug? Please create an <a href="https://github.com/contecfy/prizmux/issues" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">issue on GitHub</a>.
             </p>
           </div>
 
           <div className="p-6 rounded-lg border border-zinc-200 dark:border-zinc-800">
             <h3 className="font-semibold mb-2 text-lg">Feature Requests</h3>
             <p className="text-sm text-zinc-600 dark:text-zinc-400">
-              Have an idea? Share it in our <a href="https://github.com/your-username/prizmux/discussions" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">discussions</a>.
+              Have an idea? Share it in our <a href="https://github.com/contecfy/prizmux/discussions" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">discussions</a>.
             </p>
           </div>
         </div>

@@ -138,154 +138,56 @@ function ActionSheet() {
 | `showDragHandle` | `boolean` | `true` | Show drag handle indicator |
 | `swipeToClose` | `boolean` | `true` | Enable swipe-to-close gesture |
 | `closeIcon` | `ReactNode` | - | Custom close button icon |
+| `backgroundColor` | `string` | `#FFF` | Background of the sheet |
+| `backdropColor` | `string` | - | Overrides default semi-transparent gray |
+| `textColor` | `string` | - | Fallback color for header title text |
+| `borderColor` | `string` | - | Optional border around the sheet |
+| `borderRadius` | `number` | `20` | Top corner radius |
+| `showHeaderBorder` | `boolean` | `true` | Toggle the bottom border of the header |
+| `headerBorderBottomColor` | `string` | - | Custom color for header separator |
+| `closePosition` | `'left' \| 'right'` | `'right'` | Extreme edge alignment for close |
+| `titlePosition` | `'left' \| 'center' \| 'right'` | `'left'` | Alignment for title |
 
-## Usage
+## High-Responsiveness Dragging
 
-### Basic Bottom Sheet
+Prizmux BottomSheets support **High-Responsiveness Dragging**: The entire surface area of the sheet (not just the handle) can be swiped down to dismiss, ensuring a smooth and forgiving user experience.
 
-```tsx
-import { BottomSheet, Button, Text } from 'prizmux'
-import { useState } from 'react'
-
-export default function App() {
-  const [visible, setVisible] = useState(false)
-
-  return (
-    <>
-      <Button 
-        title="Open Sheet" 
-        onPress={() => setVisible(true)}
-      />
-      
-      <BottomSheet
-        isVisible={visible}
-        onClose={() => setVisible(false)}
-        snapPoints={[200]}
-      >
-        <Text>Sheet content</Text>
-      </BottomSheet>
-    </>
-  )
-}
-```
-
-### With Multiple Snap Points
+### Styled Bottom Sheet
 
 ```tsx
 <BottomSheet
-  isVisible={visible}
+  visible={visible}
   onClose={() => setVisible(false)}
-  snapPoints={[100, 300, 600]}
+  title="Custom Styled"
+  backgroundColor="#1F2937"
+  textColor="#F3F4F6"
+  borderRadius={32}
+  showHeaderBorder={false}
 >
-  <Text>Drag to snap to different positions</Text>
+  <View style={{ padding: 20 }}>
+    <Text style={{ color: '#F3F4F6' }}>Dark themed sheet with large corners</Text>
+  </View>
 </BottomSheet>
 ```
 
-### Action Menu
+### Extreme Header Positioning
 
 ```tsx
-import { BottomSheet, Button, Text } from 'prizmux'
-import { View } from 'react-native'
-
-function ActionMenu() {
-  const [visible, setVisible] = useState(false)
-
-  const actions = [
-    { label: 'Edit', onPress: handleEdit },
-    { label: 'Share', onPress: handleShare },
-    { label: 'Delete', onPress: handleDelete },
-  ]
-
-  return (
-    <>
-      <Button 
-        title="Options" 
-        onPress={() => setVisible(true)}
-      />
-      
-      <BottomSheet
-        isVisible={visible}
-        onClose={() => setVisible(false)}
-        snapPoints={[250]}
-      >
-        <View style={{ paddingHorizontal: 16, gap: 12 }}>
-          {actions.map((action) => (
-            <Button
-              key={action.label}
-              title={action.label}
-              variant="outline"
-              onPress={() => {
-                action.onPress()
-                setVisible(false)
-              }}
-            />
-          ))}
-        </View>
-      </BottomSheet>
-    </>
-  )
-}
-```
-
-### Filter Sheet
-
-```tsx
-import { BottomSheet, Button, Text, Checkbox } from 'prizmux'
-import { View } from 'react-native'
-
-function FilterSheet() {
-  const [visible, setVisible] = useState(false)
-  const [filters, setFilters] = useState({
-    inStock: true,
-    onSale: false,
-  })
-
-  return (
-    <>
-      <Button 
-        title="Filter" 
-        onPress={() => setVisible(true)}
-      />
-      
-      <BottomSheet
-        isVisible={visible}
-        onClose={() => setVisible(false)}
-        snapPoints={[300]}
-      >
-        <View style={{ padding: 16, gap: 16 }}>
-          <Text variant="title">Filters</Text>
-          
-          <Checkbox
-            label="In Stock"
-            value={filters.inStock}
-            onChange={(inStock) => 
-              setFilters({ ...filters, inStock })
-            }
-          />
-          
-          <Checkbox
-            label="On Sale"
-            value={filters.onSale}
-            onChange={(onSale) => 
-              setFilters({ ...filters, onSale })
-            }
-          />
-          
-          <Button 
-            title="Apply Filters"
-            onPress={() => setVisible(false)}
-          />
-        </View>
-      </BottomSheet>
-    </>
-  )
-}
+<BottomSheet
+  visible={visible}
+  onClose={() => setVisible(false)}
+  title="Settings"
+  closePosition="left"
+  titlePosition="right"
+>
+  <Text>Close button is on the extreme left, title on the right.</Text>
+</BottomSheet>
 ```
 
 ## Notes
 
-- BottomSheet automatically handles backdrop dismiss
-- Supports gestures for dismissing and resizing
-- Content is automatically scrollable if it exceeds snap points
+- Entire surface is swipeable for high-responsiveness
+- Supports gestures for dismissing
 - Handle indicator helps users understand they can drag
 - Works seamlessly with keyboard
+- Fully customizable header slots (left, center, right)
