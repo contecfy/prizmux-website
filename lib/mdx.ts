@@ -10,8 +10,33 @@ export interface DocMeta {
   slug: string
 }
 
+export interface Heading {
+  level: number
+  text: string
+  id: string
+}
+
 export interface Doc extends DocMeta {
   content: string
+}
+
+export function getHeadings(content: string): Heading[] {
+  const headingRegex = /^(#{2,3})\s+(.+)$/gm
+  const headings: Heading[] = []
+  let match
+
+  while ((match = headingRegex.exec(content)) !== null) {
+    const level = match[1].length
+    const text = match[2].trim()
+    const id = text
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/\s+/g, '-')
+
+    headings.push({ level, text, id })
+  }
+
+  return headings
 }
 
 export function getDocBySlug(slug: string): Doc | null {

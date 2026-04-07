@@ -31,7 +31,7 @@ export function Navbar() {
   shadow-sm
   text-black dark:text-white
 ">
-      <div className={`flex h-16 items-center justify-between px-4 sm:px-6 ${pathname.startsWith('/docs') ? 'mx-auto w-full' : 'mx-auto max-w-7xl'}`}>
+      <div className={`flex h-16 items-center justify-between px-4 sm:px-6 ${pathname.startsWith('/docs') ? 'w-full' : 'mx-auto max-w-7xl'}`}>
 
         {/* Left — Logo */}
         <div className="flex items-center gap-6">

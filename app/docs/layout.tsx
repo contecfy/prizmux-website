@@ -17,16 +17,14 @@ interface DocsLayoutProps {
 
 export default function DocsLayout({ children }: DocsLayoutProps) {
   return (
-    <div className="flex min-h-screen flex-col md:flex-row bg-white dark:bg-black">
+    <div className="min-h-screen w-full bg-white dark:bg-black relative">
       <Sidebar />
-
-      <div className="flex-1 w- md:pl-56">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 py-8 sm:py-10">
+      <main className="md:pl-56 w-full min-h-screen">
+        <div className="w-full px-4 sm:px-6 lg:px-12 py-8 sm:py-10 shadow-sm">
           {children}
         </div>
+      </main>
 
-        {/* Footer constrained to content width is rendered at root layout to avoid duplication */}
-      </div>
     </div>
   )
 }
